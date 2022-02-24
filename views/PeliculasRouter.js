@@ -10,6 +10,10 @@ const PeliculasController = require('../controllers/PeliculasController');
 //Coge las películas más votadas de TMDB (5 primeras páginas)
 router.get('/toprated', PeliculasController.traeTopRatedPeliculas);
 
+//http://localhost:3000/peliculas/idPeliculaEnTMDB GET
+//Traer datos de una pelicula buscándola por su id de TMDB
+router.get('/:id', PeliculasController.APItraerPeliculaPorId);
+
 //http://localhost:3000/peliculas
 //Registrar una peli nueva
 router.post('/', PeliculasController.registraPelicula);

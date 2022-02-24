@@ -11,6 +11,20 @@ const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
 //Declaro el objeto PeliculasController (siempre igual para cada controller)
 const PeliculasController = {};
 
+//MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR ID USANDO PARAMS
+PeliculasController.APItraerPeliculaPorId = async (req, res) => {
+    //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
+    let id = req.params.id
+
+    try {
+        let results = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
+
+        res.send(results.data)
+
+    } catch(error) {
+        res.send(error)
+    }
+};
 
 
 
@@ -32,10 +46,54 @@ PeliculasController.traeTopRatedPeliculas = async (req, res) => {
 };
 
 
-
+//MÉTODO POST PARA REGISTRAR PELÍCULA EN BBDD
 PeliculasController.registraPelicula = (req, res) => {
+    let title = req.body.title;
+    let synopsis = req.body.synopsis;
+    let adult = req.body.adult;
+    let popularity = req.body.popularity;
+    let image = req.body.image;
 
+
+    Pelicula.findAll({
+        where : {title : title}
+
+    }).then(peliculaRepetida => {
+        if(peliculaRepetida == 0) {
+            Pelicula.create({
+                title : title,
+                synopsis : synopsis,
+                adult : adult,
+                popularity : popularity,
+                image : image
+            }).then(pelicula => {
+                res.send(`La pelicula ${pelicula.dataValues.title}, ha sido registrada correctamente`);
+            }).catch((error) => {
+                res.send(error);
+            });
+        }else {
+            res.send(`La pelicula ${title}, ya está registrada en la base de datos`);
+        }
+        
+    }).catch(error => {
+        res.send(error)
+    });
 };
+
+// {
+//     "title": "El silencio de los corderos",
+//     "synopsis": "Un tío muy carismático que come personas",
+//     "adult" : true,
+//     "popularity": 7.3,
+//     "image": "stringIMAGE"
+// }
+
+
+
+
+
+
+
 
 PeliculasController.peliculasTitulo = async (req, res) => {
 

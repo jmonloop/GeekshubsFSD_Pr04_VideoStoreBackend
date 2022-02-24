@@ -166,9 +166,13 @@ UsuariosController.login = (req, res) => {
 
 //Para enviar cosas a la BBDD para hacer consultas, podemos enviarlos directamente por la URL (ver req.query y req.params) utilizando GET.
 //Más info: https://stackoverflow.com/questions/14417592/node-js-difference-between-req-query-and-req-params
+//req.params --> meter una variable al final de una URL
+    //www.finaldelendpoint.com/var1
+//req.query --> meter claves valor al final de una URL:
+    //www.finaldelendpoint.com/?clave1=valor1&clave2=valor2
 //Este método solo se usa para datos que no son sensibles ya que cualquiera los puede ver solo leyendo el tráfico de la web.
 
-//Si queremos enviar muchos datos, o datos sensibles, SIEMPRE debemos usar el body.
+//Si queremos enviar datos sensibles, SIEMPRE debemos usar el body.
 
 //METODO POST PARA MOSTRAR USUARIO POR EMAIL DESDE LA URL
 //Aquí hacemos una búsqueda por email. El email lo metemos por Postman + Params o directamente al final del endpoint
@@ -279,15 +283,15 @@ UsuariosController.updatePassword = (req,res) => {
                     password: newPassword
                 }
 
-                //hacemos update 
+                //hacemos update, es decir ejecutamos el 2do paso
                 Usuario.update(data, {
-                    //en el usuario con id que coincida con el que nos llega por body
+                    //para el usuario con id que coincida con el que nos llega por body
                     where: {id : id}
                 })
                 .then(actualizado => {
-                    //y lo enviamos por Postman
-                    console.log(actualizado)
-                    res.send(actualizado);
+                    //y enviamos confirmación por Postman
+                    // console.log(usuarioFound.dataValues.password)
+                    res.send('Tu password ha sido actualizado');
                 })
                 .catch((error) => {
                     res.status(401).json({ msg: `Ha ocurrido un error actualizando el password`});
