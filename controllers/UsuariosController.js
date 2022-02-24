@@ -246,9 +246,9 @@ UsuariosController.modificarUsuario = async (req, res) => {
 }
 //Con esta función modificamos los datos
     //    {
-    //         "nombre":"JaviMOD",
-    //         "apellido1":"MonleónMOD",
-    //         "apellido2":"LópezMOD",
+    //         "name":"JaviMOD",
+    //         "surname":"MonleónMOD",
+    //         "age":32,
     //     }
 
 

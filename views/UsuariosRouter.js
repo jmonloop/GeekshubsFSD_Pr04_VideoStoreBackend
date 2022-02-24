@@ -68,5 +68,5 @@ router.put('/profile/:id', auth, UsuariosController.modificarUsuario);
 
 
 
-//"Cierro" el circuito de enrutado para este fichero JS.(siempre igual)
+//Después de haber ejecutado la lógica de UsuariosRouter, exporto router.(siempre igual)
 module.exports = router;
