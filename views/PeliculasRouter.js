@@ -1,14 +1,14 @@
 //Importo la clase express y la guardo en la variable express (siempre igual)
 const express = require('express');
-//"Abro" el circuito de enrutado para este fichero JS (siempre igual)
+//ejecuto el método Router() de express (siempre igual)
 const router = express.Router();
 //Importo el fichero UsuariosController y lo guardo en la variable UsuariosController. Luego habrá que crearlo.
 const PeliculasController = require('../controllers/PeliculasController');
 
 //Enlazo método(CRUD), endpoint y función. (Explicación en UsuariosRouter)
-//http://localhost:3000/peliculas
-//Leer todas las peliculas
-router.get('/', PeliculasController.traePeliculas);
+//http://localhost:3000/peliculas/toprated
+//Coge las películas más votadas de TMDB (5 primeras páginas)
+router.get('/toprated', PeliculasController.traeTopRatedPeliculas);
 
 //http://localhost:3000/peliculas
 //Registrar una peli nueva
@@ -31,5 +31,5 @@ router.get('/titulo', PeliculasController.peliculasTitulo);
 router.get('/novedades', PeliculasController.traeNovedades);
 
 
-//"Cierro" el circuito de enrutado para este fichero JS.(siempre igual)
+//Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

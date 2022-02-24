@@ -1,6 +1,6 @@
 //Importo la clase express y la guardo en la variable express (siempre igual)
 const express = require('express');
-//"Abro" el circuito de enrutado para este fichero JS (siempre igual)
+//ejecuto el método Router() de express (siempre igual)
 const router = express.Router();
 //Importo el fichero ../middlewares/auth para limitar ciertos endpoints que requieren de autorización
 const auth = require("../middlewares/auth");
@@ -62,11 +62,12 @@ router.delete('/:id', UsuariosController.borrarPorId);
 //Recibe por URL/params un id de usuario y modifica su perfil solo si el usuario está logueado (auth)
 router.put('/profile/:id', auth, UsuariosController.modificarUsuario);
 
+//http://localhost:3000/usuarios/newpassword (usando un PUT)
+//Recibe por body en formato json el id de un usuario, el password actual y el password nuevo para cambiar el password del usuario solo si el usuario está logueado (auth)
+router.put('/newpassword', auth, UsuariosController.updatePassword);
 
 
 
 
-
-
-//Después de haber ejecutado la lógica de UsuariosRouter, exporto router.(siempre igual)
+//Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

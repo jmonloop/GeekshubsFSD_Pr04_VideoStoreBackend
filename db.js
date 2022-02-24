@@ -19,6 +19,7 @@ const sequelize = new Sequelize(
     }
 );
 
+//Exporto sequelize.authenticate() para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = sequelize.authenticate()
 .then((db)=>{
     console.log('MYSQL connected'); 

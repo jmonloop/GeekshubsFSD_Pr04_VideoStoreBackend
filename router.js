@@ -1,10 +1,7 @@
 //ROUTER.JS
 //En este fichero enlazamos los ficheros de cada endpoint con su dirección en la barra de dirección (enrutar)
 
-//Importo la clase express y ejecuto el método Router()
-//sirve para rutear todo lo que se ejecute en este fichero JS
-//se complementa con la última línea "module.exports = router"
-//"Abro" el circuito de enrutado para este fichero JS (siempre igual)
+//Importo la clase express y ejecuto el método Router() (siempre igual)
 const router = require('express').Router();
 
 
@@ -24,7 +21,7 @@ router.use('/pedidos', PedidosRouter);
 
 
 
-//"Cierro" el circuito de enrutado para este fichero JS.(siempre igual)
+//Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;
 
 

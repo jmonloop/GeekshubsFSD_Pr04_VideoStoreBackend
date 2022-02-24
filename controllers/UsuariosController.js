@@ -1,4 +1,4 @@
-//Declaro el modelo Usuario para poder escribir en la tabla Usuario de la BBDD
+//Importo el modelo Usuario desestructurado (en formato objeto) para poder escribir en la tabla Usuario de la BBDD
 const { Usuario } = require('../models/index');
 //Importo el operador de sequelize para poder hacer consultas a la BBDD con condicionales
 const { Op } = require("sequelize");
@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
 //Importo la clase jsonwebtoken para generar un token al hacer login
 const jwt = require('jsonwebtoken');
-
 //Declaro el objeto UsuariosController (siempre igual para cada controller)
 const UsuariosController = {};
 
@@ -253,6 +252,61 @@ UsuariosController.modificarUsuario = async (req, res) => {
 
 
 
+//MÉTODO PUT PARA QUE UN USUARIO MODIFIQUE SU PASSWORD
+UsuariosController.updatePassword = (req,res) => {
+    //Capturo el id que entra por body
+    let id = req.body.id;
+    //Capturo el password viejo que entra por body
+    let oldPassword = req.body.oldPassword;
+    //Capturo el nuevo password que entra por body
+    let newPassword = req.body.newPassword;
+
+    //Busca el usuario
+    Usuario.findOne({
+        //donde su id coincida con la id que llega por body
+        where : { id : id}
+    }).then(usuarioFound => {
+        //Si lo encuentra...
+        if(usuarioFound){
+            //..y si el password antiguo coincide con el de la BBDD...
+            if (bcrypt.compareSync(oldPassword, usuarioFound.password)) {
+
+                //1er paso..encriptamos el nuevo password....
+                newPassword = bcrypt.hashSync(newPassword, Number.parseInt(authConfig.rounds)); 
+
+                //2do paso: asignamos el atributo password de la BBDD al newPassword que nos llegó por body. Esto lo guardamos en un json llamado data
+                let data = {
+                    password: newPassword
+                }
+
+                //hacemos update 
+                Usuario.update(data, {
+                    //en el usuario con id que coincida con el que nos llega por body
+                    where: {id : id}
+                })
+                .then(actualizado => {
+                    //y lo enviamos por Postman
+                    console.log(actualizado)
+                    res.send(actualizado);
+                })
+                .catch((error) => {
+                    res.status(401).json({ msg: `Ha ocurrido un error actualizando el password`});
+                });
+                //si el password antiguo es incorrecto da fallo
+            }else{
+                res.status(401).json({ msg: "Usuario o contraseña inválidos" });
+            }
+
+            //si no encuentra el usuario da fallo
+        }else{
+            res.send(`Usuario no encontrado`);
+        }
+
+    }).catch((error => {
+        res.send(error);
+    }));
+
+};
 
 
 
@@ -260,7 +314,5 @@ UsuariosController.modificarUsuario = async (req, res) => {
 
 
 
-
-
-//"Cierro" el circuito de enrutado para este fichero JS.(siempre igual)
+//Exporto UsuariosController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = UsuariosController;

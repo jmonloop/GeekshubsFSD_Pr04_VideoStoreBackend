@@ -1,17 +1,37 @@
-const { default: axios } = require("axios");
+//Importo la clase axios para poder hacer llamadas a otros endpoints
+const axios = require("axios");
+//Importo el modelo Pelicula desestructurado (en formato objeto) para poder escribir en la tabla Pelicula de la BBDD
 const { Pelicula } = require('../models/index');
+//Importo el operador de sequelize para poder hacer consultas a la BBDD con condicionales
 const { Op } = require("sequelize");
+//Importo compareSync desestructurado usando la clase bcrypt para poder comparar variables encriptadas
 const { compareSync } = require("bcrypt");
-
-
+//Declaro la API_KEY necesaria para ejecutar endpoints en TMDB
+const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
+//Declaro el objeto PeliculasController (siempre igual para cada controller)
 const PeliculasController = {};
 
 
-//Funciones del controlador
 
-PeliculasController.traePeliculas = (req, res) => {
 
+//MÉTODO GET PARA MOSTRAR LAS 5 PRIMERAS PÁGINAS DE LAS PELÍCULAS MÁS VALORADAS DE TMDB
+//http://localhost:3000/peliculas/toprated GET
+PeliculasController.traeTopRatedPeliculas = async (req, res) => {
+    const ratedArr = []; //Declaro array vacío que es donde guardaremos el json con el listado de películas
+    try {
+        //Creamos un bucle for e iteramos el valor de page para que nos saque las 5 primeras páginas de rated
+        for(let i=1 ; i<6 ; i++){
+            //llamada por axios al endpoint de TMDB interpolando la API_KEY
+            let results = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${i}`);
+            ratedArr.push(results.data)
+        }//Muestro el array de páginas
+        res.send(ratedArr);
+    } catch(error) {
+        res.send(error);
+    };
 };
+
+
 
 PeliculasController.registraPelicula = (req, res) => {
 
@@ -115,4 +135,5 @@ PeliculasController.peliculasAdultas = (req,res) => {
 
 }
 
+//Exporto PeliculasController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = PeliculasController;
