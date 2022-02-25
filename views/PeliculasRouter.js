@@ -16,7 +16,7 @@ router.get('/titulo', PeliculasController.peliculasTitulo);
 
 //http://localhost:3000/peliculas/idPeliculaEnTMDB GET
 //Traer datos de una pelicula buscándola por su id de TMDB usando params
-//OJO! Si este endpoint lo pusiésemos arriba de el de buscar por titulo, JS al leer la URL cree que 'titulo' es un id y da fallo.
+//OJO! Si este endpoint lo pusiésemos arriba por ejemplo de el de buscar por titulo, JS al leer la URL cree que 'titulo' es un id y da fallo.
 //Es por ello que al usar params hay que tener cuidado de no ponerlos en endpoints comunes o ponerlos al final del todo del xxxRouter
 router.get('/:id', PeliculasController.APItraerPeliculaPorId);
 
