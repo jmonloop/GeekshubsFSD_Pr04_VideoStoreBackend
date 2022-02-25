@@ -100,7 +100,7 @@ PeliculasController.registraPelicula = (req, res) => {
         //Si la encuentra...
         }else {
             //Envío mensaje de que ya existe en la BBDD
-            res.send(`La pelicula ${title}, ya está registrada en la base de datos`);
+            res.send(`La pelicula ${peliculaRepetida[0].title}, ya está registrada en la base de datos`);
         }
         
     }).catch(error => {

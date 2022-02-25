@@ -164,6 +164,7 @@ UsuariosController.login = (req, res) => {
 
 
 
+
 //Para enviar cosas a la BBDD para hacer consultas, podemos enviarlos directamente por la URL (ver req.query y req.params) utilizando GET.
 //Más info: https://stackoverflow.com/questions/14417592/node-js-difference-between-req-query-and-req-params
 //req.params --> meter una variable al final de una URL
