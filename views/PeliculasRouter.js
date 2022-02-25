@@ -7,22 +7,32 @@ const PeliculasController = require('../controllers/PeliculasController');
 
 //Enlazo método(CRUD), endpoint y función. (Explicación en UsuariosRouter)
 //http://localhost:3000/peliculas
-//Coge las películas más votadas de TMDB (5 primeras páginas)
-router.get('/', PeliculasController.traePeliculas);
+//Copia la base de datos de TMDB en nuestra BBDD
+router.get('/', PeliculasController.clonaPeliculas);
+
+//http://localhost:3000/peliculas
+//Registrar una peli nueva
+router.post('/', PeliculasController.registraPelicula);
+
+//http://localhost:3000/peliculas (DELETE)
+//Borra todas las pelculas de nuestra BBDD
+router.delete('/', PeliculasController.borrarTodasPeliculas)
 
 //http://localhost:3000/peliculas/titulo?criterio=tituloPelicula
 //Traer peliculas de TMDB por titulo usando query
-router.get('/titulo', PeliculasController.peliculasTitulo);
+router.get('/titulo', PeliculasController.APItraePeliculaPorTitulo);
 
 //http://localhost:3000/peliculas/idPeliculaEnTMDB GET
 //Traer datos de una pelicula buscándola por su id de TMDB usando params
 //OJO! Si este endpoint lo pusiésemos arriba por ejemplo de el de buscar por titulo, JS al leer la URL cree que 'titulo' es un id y da fallo.
 //Es por ello que al usar params hay que tener cuidado de no ponerlos en endpoints comunes o ponerlos al final del todo del xxxRouter
-router.get('/:id', PeliculasController.APItraerPeliculaPorId);
+router.get('/:id', PeliculasController.APItraePeliculaPorId);
+
+
 
 //http://localhost:3000/peliculas
-//Registrar una peli nueva
-router.post('/', PeliculasController.registraPelicula);
+//Coge las películas más votadas de TMDB (5 primeras páginas)
+router.get('/toprated', PeliculasController.APItopRated);
 
 
 //http://localhost:3000/peliculas/novedades
