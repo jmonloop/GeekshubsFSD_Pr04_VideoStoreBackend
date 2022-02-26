@@ -5,12 +5,39 @@ const PeliculasController = require('../controllers/PeliculasController');
 
 //Enlazo método(CRUD), endpoint y función. (Explicación en UsuariosRouter)
 //http://localhost:3000/peliculas
-//Copia 10k películas al azar de TMDB cogiendo los campos necesarios para nuestra BBDD
-// router.get('/', PeliculasController.clona);
+// Copia 500 películas al azar de TMDB adaptando los campos necesarios para nuestra BBDD
+router.get('/', async(req, res) => {
+    try {
+        res.json(await PeliculasController.clona())
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 
 //http://localhost:3000/peliculas
 //Registrar una película nueva
-// router.post('/', PeliculasController.registra);
+router.post('/', async(req, res) => {
+    try {
+        //Capturo las variables que llegan por el json de body
+        let title = req.body.title;
+        let synopsis = req.body.synopsis;
+        let adult = req.body.adult;
+        let popularity = req.body.popularity;
+        let image = req.body.image;
+
+        //Las guardo en un array
+        let parArr = [title, synopsis, adult, popularity, image];
+
+        //Las meto como parámetros usando spread
+        res.json(await PeliculasController.registra(...parArr))
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 
 //http://localhost:3000/peliculas (DELETE)
 //Borra todas las pelculas de nuestra BBDD

@@ -17,11 +17,95 @@ const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
 // const PeliculasController = {};
 
 
+//Declaro función para obtener número random entre dos límites
+const minMaxRoundedRandom = (min, max) => {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
+
 class PeliculaClass {
     constructor(){
 
     }
 
+    //Clono 500 películas aleatorias de TMDB adaptando los campos a los de mi BBDD
+    clona = async () => {
+        //Variable para añadir a la imagen de TMDB y guardarla en nuestra BBDD
+        let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
+        //Lanzo axios una vez para capturar la cantidad de páginas total que voy a tener que recorrer
+        let firstScan = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
+        // Guardo el total de páginas que necesito recorrer
+        let numbOfPagesTMDB = firstScan.data.total_pages
+        let numbOfFilmsTMDB = firstScan.data.total_results
+
+        for(let j=1 ; j<=25 ; j++) {
+            let resultados = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
+        
+            //Variable para saber los resultados por página
+            let numbOfResultsPerPageTMDB = resultados.data.results.length
+            //Recorro los resultados de la página guardando los campos que me interesan en mi BBDD
+            for(let i=0; i<numbOfResultsPerPageTMDB ; i++) {
+                Pelicula.create({
+                    //guardando en cada atributo los datos que llegan por body
+                    title : resultados.data.results[i].original_title,
+                    synopsis : resultados.data.results[i].overview,
+                    adult : resultados.data.results[i].adult,
+                    popularity : resultados.data.results[i].popularity,
+                    image : (TMDBimgUrlRoot + "/" + resultados.data.results[i].poster_path)
+                })
+            }
+        }
+
+        return (`Se han clonado exitosamente ${25} páginas, con un total de ${500} peliculas`)
+    }
+
+    //Registro pelicula con los parámetros que llegan por body
+    registra = async (title, synopsis, adult, popularity, image) => {
+        //Hago findAll de la película
+        return (
+            Pelicula.findAll({
+            //Donde el atributo title se compara con el title que llega por body
+            where : {title : title}
+            
+                //Si la promesa se cumple
+            }).then(peliculaRepetida => {
+                //Si no la encuentra (array vacío)...
+                if(peliculaRepetida == 0) {
+                    //Crea un elemento nuevo en la tabla Pelicula
+                    return Pelicula.create({
+                        //guardando en cada atributo los datos que llegan por body
+                        title : title,
+                        synopsis : synopsis,
+                        adult : adult,
+                        popularity : popularity,
+                        image : image
+                    }).then(pelicula => {
+                        //Y envío un mensaje de confirmación
+                        return (`La pelicula ${pelicula.dataValues.title}, ha sido registrada correctamente`);
+                    }).catch((error) => {
+                        return (error);
+                    });
+                    
+                    
+                //Si la encuentra...
+                }else {
+                    //Envío mensaje de que ya existe en la BBDD
+                    return (`La pelicula ${peliculaRepetida[0].title}, ya está registrada en la base de datos`);
+                }
+            })
+        )
+
+    // // {
+    // //     "title": "El silencio de los corderos",
+    // //     "synopsis": "Un tío muy carismático que come personas",
+    // //     "adult" : true,
+    // //     "popularity": 7.3,
+    // //     "image": "stringIMAGE"
+    // // }
+
+    }
+
+    //Borro todas las películas de mi BBDD
     borraTodas = async () => {
         return ( 
             Pelicula.destroy({
@@ -34,66 +118,27 @@ class PeliculaClass {
     }
 
 
-
     
+
+
+
+
 }
 
-// //Declaro función para obtener número random entre dos límites
-// const minMaxRoundedRandom = (min, max) => {
-//     return Math.round(Math.random() * (max - min) + min);
-// }
-
-
-// // MÉTODO GET PARA CLONAR 500 PELICULAS DE TMDB ADAPTANDO lOS CAMPOS A NUESTRA BBDD
-// http://localhost:3000/peliculas/toprated GET
-// PeliculasController.clona = async (req, res) => {
-//     try {
-//         // }//Variable para añadir a la imagen de TMDB y guardarla en nuestra BBDD
-//         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
-//         //Lanzo axios una vez para capturar la cantidad de páginas total que voy a tener que recorrer
-//         let firstScan = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
-//         // Guardo el total de páginas que necesito recorrer
-//         let numbOfPagesTMDB = firstScan.data.total_pages
-//         let numbOfFilmsTMDB = firstScan.data.total_results
-
-//         for(let j=1 ; j<=25 ; j++) {
-//             let resultados = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
-        
-//             //Variable para saber los resultados por página
-//             let numbOfResultsPerPageTMDB = resultados.data.results.length
-//             //Recorro los resultados de la página guardando los campos que me interesan en mi BBDD
-//             for(let i=0; i<numbOfResultsPerPageTMDB ; i++) {
-//                 Pelicula.create({
-//                     //guardando en cada atributo los datos que llegan por body
-//                     title : resultados.data.results[i].original_title,
-//                     synopsis : resultados.data.results[i].overview,
-//                     adult : resultados.data.results[i].adult,
-//                     popularity : resultados.data.results[i].popularity,
-//                     image : (TMDBimgUrlRoot + "/" + resultados.data.results[i].poster_path)
-//                 })
-//             }
-//         }
-        
-        
-//         res.send(`Se han clonado exitosamente ${25} páginas, con un total de ${500} peliculas`);
-//     } catch(error) {
-//         res.send(error);
-//     };
-// };
 
 // // MÉTODO POST PARA REGISTRAR PELÍCULA EN BBDD
 // PeliculasController.registra = (req, res) => {
 //     //Capturo las variables que llegan por el json de body
-//     let title = req.body.title;
-//     let synopsis = req.body.synopsis;
-//     let adult = req.body.adult;
-//     let popularity = req.body.popularity;
-//     let image = req.body.image;
+    // let title = req.body.title;
+    // let synopsis = req.body.synopsis;
+    // let adult = req.body.adult;
+    // let popularity = req.body.popularity;
+    // let image = req.body.image;
 
-//     //Hago un findAll de la tabla Pelicula
-//     Pelicula.findAll({
-//         //Donde el atributo title se compara con el title que llega por body
-//         where : {title : title}
+    // //Hago un findAll de la tabla Pelicula
+    // Pelicula.findAll({
+    //     //Donde el atributo title se compara con el title que llega por body
+    //     where : {title : title}
 
 //     }).then(peliculaRepetida => {
 //         //Si no la encuentra (array vacío)...
