@@ -210,14 +210,31 @@ UsuariosController.borrarTodos = async (req, res) => {
 
 //MÉTODO DELETE PARA BORRAR UN USUARIO DE LA BBDD POR ID
 UsuariosController.borrarPorId = async (req, res) => {
+    //Busco el usuario en mi BBDD
     try {
-        Usuario.destroy({
-            where : { id : req.params.id }, //Ahora le decimos que enlace el id que le metemos en la URL con el atributo id de la tabla. Para borrar solo ese usuario
-            truncate : false,
-            // restartIdentity: true
-        }).then(elmnt =>{
-            res.send(`Se ha eliminado el usuario`);
-        });
+        Usuario.findOne({
+            where : {id : req.params.id}
+            //Se resuelve la promesa de sequelize
+        }).then(elmnt => {
+            //Si devuelve un valor que no sea null...
+            if(elmnt != null) {
+                //..almaceno el valor para mostrarlo después de borrarlo
+                let usuarioBorrado = elmnt
+                //..borro el elemento de la BBDD
+                Usuario.destroy({
+                    where : { id : req.params.id },
+                    truncate : false
+                    //Una vez se cumple la promesa de borrarlo...
+                }).then(x => {
+                    //Muestro mensaje con el nombre del usuario que se ha borrado
+                    res.send(`Se ha eliminado el usuario ${usuarioBorrado.dataValues.name}`)
+                })
+                //Si devuelve null quiere decir que no existen usuarios con esa id
+            } else {
+                res.send('No existe ningún usuario con esa id en tu base de datos')
+            }
+        })
+
     } catch (error) {
         res.send(error);
     };
