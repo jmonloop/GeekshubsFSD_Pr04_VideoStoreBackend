@@ -85,8 +85,8 @@ router.get('/toprated', async(req, res) => {
 //Muestra el número total de películas que hay registradas en nuestra BBDD
 router.get('/cantidad', async(req, res) => {
     try {
-        res.json(await  PeliculasController.muestraCantidad())
-        
+        res.json(await PeliculasController.muestraCantidad())
+
     } catch(error) {
         return res.status(500).json({
             message: error.message
@@ -94,12 +94,22 @@ router.get('/cantidad', async(req, res) => {
     }
 });
 
-
 //http://localhost:3000/peliculas/idPeliculaEnTMDB GET
 //Traer datos de una pelicula buscándola por su id de TMDB usando params
 //OJO! Si este endpoint lo pusiésemos arriba por ejemplo de el de buscar por titulo, JS al leer la URL cree que 'titulo' es un id y da fallo.
 //Es por ello que al usar params hay que tener cuidado de no ponerlos en endpoints comunes o ponerlos al final del todo del xxxRouter
-// router.get('/:id', PeliculasController.APItraePorId);
+router.get('/:id', async(req, res) => {
+    try {
+        //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
+        let id = req.params.id
+        res.json(await PeliculasController.APItraePorId(id))
+
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

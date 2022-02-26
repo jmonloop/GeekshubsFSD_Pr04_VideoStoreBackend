@@ -117,7 +117,7 @@ class PeliculaClass {
         )
     };
 
-    //Busco pelicula en TMDB por título usando query
+    //Busco y muestro pelicula de TMDB por título usando query
     APItraePorTitulo = async (titulo) => {
         //Hago la llamada al endpoint de TMDB interpolando la API_KEY y el valor de búsqueda.
         let resultados = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${titulo}&page=1&include_adult=false`);
@@ -164,44 +164,16 @@ class PeliculaClass {
         };
     };
 
+    //Busco y muestro película de TMDB por id usando params
+    APItraePorId = async (id) => {
+        //Hago llamada al endpoint de TMDB interpolando el id que nos llega por params
+        let results = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
+
+        return results.data
+    };
 
 }
 
-
-// // //MÉTODO GET PARA MOSTRAR LA CANTIDAD DE PELICULAS QUE TENEMOS REGISTRADAS EN NUESTRA BBDD
-// http://localhost:3000/peliculas/cantidad GET
-// PeliculasControllerClass.muestraCantidad = async (req, res) => {
-//     let consulta = `SELECT COUNT(*) FROM peliculas;`;
-
-//     let resultado = await Pelicula.sequelize.query(consulta,{
-//         //Esta línea es para que no devuelva resultados duplicados
-//         type: Pelicula.sequelize.QueryTypes.SELECT});
-
-//     if(resultado){
-//         let valor = resultado[0]['COUNT(*)']
-//         if(valor > 0) {
-//             res.send(`Hay un total de ${valor} peliculas registradas en la base de datos`);
-//         }else {
-//             res.send(`No hay niguna pelicula registrada en la base de datos`)
-//         }
-//     }
-// }
-
-
-// // MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR ID USANDO PARAMS
-// PeliculasController.APItraePorId = async (req, res) => {
-//     //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
-//     let id = req.params.id
-
-//     try {
-//         let results = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
-
-//         res.send(results.data)
-
-//     } catch(error) {
-//         res.send(error)
-//     }
-// };
 
 
 
