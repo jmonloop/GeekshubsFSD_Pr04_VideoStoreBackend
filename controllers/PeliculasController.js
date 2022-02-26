@@ -1,28 +1,19 @@
 //Importo la clase axios para poder hacer llamadas a otros endpoints
 const axios = require("axios");
-const res = require("express/lib/response");
 //Importo el modelo Pelicula desestructurado (en formato objeto) para poder escribir en la tabla Pelicula de la BBDD
-// const { Pelicula } = require('../models/index');
-//Importo el operador de sequelize para poder hacer consultas a la BBDD con condicionales
-// const { Op } = require("sequelize");
-//Importo compareSync desestructurado usando la clase bcrypt para poder comparar variables encriptadas
-// const { compareSync } = require("bcrypt");
-
-
-
 const { Pelicula } = require('../models/index')
 //Declaro la API_KEY necesaria para ejecutar endpoints en TMDB
 const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
-//Declaro el objeto PeliculasController (siempre igual para cada controller)
-// const PeliculasController = {};
-
-
 //Declaro función para obtener número random entre dos límites
 const minMaxRoundedRandom = (min, max) => {
     return Math.round(Math.random() * (max - min) + min);
 }
 
 
+//En esta forma, lo que generamos es una clase PeliculaClass (con constructor vacío) donde meteremos todos los métodos que hacen de función controladora.
+
+//Las principales diferencias respecto al método que hemos usado en UsuariosController es que de esta forma hemos de meter los parámetros de entrada (req.query, req.params o req.body) en la declaración del endpoint (en el xxxRouter).
+//La otra diferencia es que en la función controladora, al ser un método, en vez de devolver resultados por res.send, los devolvemos con return.
 class PeliculaClass {
     constructor(){
 
@@ -34,19 +25,21 @@ class PeliculaClass {
         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
         //Lanzo axios una vez para capturar la cantidad de páginas total que voy a tener que recorrer
         let firstScan = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
-        // Guardo el total de páginas que necesito recorrer
+        // Guardo el total de páginas que necesito recorrer (no se usa porque TMDB te limita a 10k películas)
         let numbOfPagesTMDB = firstScan.data.total_pages
         let numbOfFilmsTMDB = firstScan.data.total_results
 
+        //Si quisiéramos clonar TODA TMDB habría que meter el valor en j<valor. Para este proyecto he preferido clonar solo 25 páginas para no demorar mucho la práctica.
         for(let j=1 ; j<=25 ; j++) {
+            //Hago la llamada al endpoint de TMDB interpolando la función random donde va el número de página y así no traernos siempre los resultados en el mismo orden
             let resultados = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
         
             //Variable para saber los resultados por página
             let numbOfResultsPerPageTMDB = resultados.data.results.length
-            //Recorro los resultados de la página guardando los campos que me interesan en mi BBDD
+            //Recorro los resultados de la página guardando los campos que me interesan en mi BBDD..
             for(let i=0; i<numbOfResultsPerPageTMDB ; i++) {
                 Pelicula.create({
-                    //guardando en cada atributo los datos que llegan por body
+                    //..guardando en cada atributo los datos que llegan por body
                     title : resultados.data.results[i].original_title,
                     synopsis : resultados.data.results[i].overview,
                     adult : resultados.data.results[i].adult,
@@ -188,7 +181,6 @@ class PeliculaClass {
         }
 
     };
-
 
     //Busco y muestro película de TMDB por id usando params
     APItraePorId = async (id) => {

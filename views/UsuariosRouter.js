@@ -66,6 +66,10 @@ router.put('/profile/:id', auth, UsuariosController.modificarUsuario);
 //Recibe por body en formato json el id de un usuario, el password actual y el password nuevo para cambiar el password del usuario solo si el usuario está logueado (auth)
 router.put('/newpassword', auth, UsuariosController.updatePassword);
 
+//http://localhost:3000/usuarios/custom/terminoABuscar (usando un GET)
+//Recibo por body en formato json los datos de usuario de mi BBDD buscándolo por un término usando params
+router.get('/custom/:termino', UsuariosController.buscaTermino)
+
 
 
 

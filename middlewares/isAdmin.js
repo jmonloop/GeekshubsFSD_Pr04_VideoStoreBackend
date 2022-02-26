@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
             res.send(`El usuario no es admin`)
         }
     }).catch(error => {
-        res.send(error)
+        res.send(`Introduce un id de usuario con rol admin`)
     })
 
 };

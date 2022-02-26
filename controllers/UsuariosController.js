@@ -11,6 +11,9 @@ const jwt = require('jsonwebtoken');
 //Declaro el objeto UsuariosController (siempre igual para cada controller)
 const UsuariosController = {};
 
+
+
+
 //Lógica de cada función.
 //Si alguien luego quisiera coger estos datos de nuestra API (un front u otra API externa) tendrá que:
 //let resultado= await axios.get(http://localhost3000/usuarios) y recibiremos en este caso lo que en la función traeUsuarios nos devuelva por res.
@@ -24,7 +27,6 @@ UsuariosController.traeUsuarios = (req, res) => {
         res.send(data) //.send se usa para enviarlo de vuelta y mostrarlo
     });
 };
-
 
 //En este caso es un método post que lo que hace es escribir desde el body de Postman (pero sin guardarlo en la BBDD).
 UsuariosController.escribeEnCrudo = async (req, res) => {
@@ -45,8 +47,6 @@ UsuariosController.escribeEnCrudo = async (req, res) => {
         res.send(error);
     }; 
 };
-
-
 
 //MÉTODO POST PARA ESCRIBIR EN LA BASE DE DATOS
 UsuariosController.registraUsuario = async (req, res) => {
@@ -129,7 +129,6 @@ UsuariosController.registraUsuario = async (req, res) => {
 };
 
 
-
 //Método post para loguearse metiendo los datos por body y generar un token nuevo en caso de login satisfactorio.
 //El usuario debe estar registrado en la BBDD con un email y password válidos
 UsuariosController.login = (req, res) => {
@@ -149,9 +148,9 @@ UsuariosController.login = (req, res) => {
                 //Mensaje de confirmación de login satisfactorio
                 let mensajeLoginOk = `Bienvenid@ de nuevo ${elmnt.dataValues.name}`
                 res.json({   // y envía por Postman...
+                    mensajeLoginOk, //el mensaje
                     usuario: elmnt, //el usuario
-                    token: token, // el token generado
-                    mensajeLoginOk //y el mensaje
+                    token: token //y el token generado
                 })
             } else {
                 res.status(401).json({ msg: "Usuario o contraseña inválidos" }); //si no son iguales, login inválido
@@ -161,8 +160,6 @@ UsuariosController.login = (req, res) => {
         res.send(error);    //catch para pillar el error
     })
 };
-
-
 
 
 //Para enviar cosas a la BBDD para hacer consultas, podemos enviarlos directamente por la URL (ver req.query y req.params) utilizando GET.
@@ -187,7 +184,6 @@ UsuariosController.traerUsuarioEmail = (req, res) => {
     });
 }
 
-
 //MÉTODO GET PARA SACAR UN ELEMENTO DE LA BBDD BUSCÁNDOLO POR NICKNAME EN LA URL
 UsuariosController.userProfile = (req, res) => {
     //Búsqueda comparando un campo
@@ -196,10 +192,6 @@ UsuariosController.userProfile = (req, res) => {
         res.send(elmnt)
     });
 }
-
-
-
-
 
 //MÉTODO DELETE PARA BORRAR TODOS LOS USUARIOS DE LA BBDD
 UsuariosController.borrarTodos = async (req, res) => {
@@ -216,8 +208,6 @@ UsuariosController.borrarTodos = async (req, res) => {
     };
 };
 
-
-
 //MÉTODO DELETE PARA BORRAR UN USUARIO DE LA BBDD POR ID
 UsuariosController.borrarPorId = async (req, res) => {
     try {
@@ -233,7 +223,6 @@ UsuariosController.borrarPorId = async (req, res) => {
     };
 };
 
-
 //MÉTODO PUT PARA MODIFICAR EL PERFIL DE UN USUARIO POR ID
 UsuariosController.modificarUsuario = async (req, res) => {
     let id = req.params.id;
@@ -247,15 +236,13 @@ UsuariosController.modificarUsuario = async (req, res) => {
     } catch (error) {
         res.send(error);
     }
-}
-//Con esta función modificamos los datos
-    //    {
+
+        //    {
     //         "name":"JaviMOD",
     //         "surname":"MonleónMOD",
     //         "age":32,
     //     }
-
-
+}
 
 //MÉTODO PUT PARA QUE UN USUARIO MODIFIQUE SU PASSWORD
 UsuariosController.updatePassword = (req,res) => {
@@ -313,6 +300,33 @@ UsuariosController.updatePassword = (req,res) => {
 
 };
 
+//Recibo por body en formato json los datos de usuario de mi BBDD buscándolo por un término usando params
+UsuariosController.buscaTermino = async (req, res) => {
+    let termino = req.params.termino
+
+    //declaro el string que forma la consulta de SQL
+    let consulta = 
+    `SELECT * FROM videoclub.usuarios
+    WHERE name LIKE '%${termino}%'
+    OR surname LIKE '%${termino}%'
+    OR age LIKE '%${termino}%'
+    OR email LIKE '%${termino}%'
+    OR nickname LIKE '%${termino}%'
+    OR rol LIKE '%${termino}%'`;
+
+    //genero el método de sequelize para hacer a consulta SQL en crudo
+    let resultado = await Usuario.sequelize.query(consulta,{
+    //Esta línea es para que no devuelva resultados duplicados
+    type: Usuario.sequelize.QueryTypes.SELECT});
+
+    //Si la consulta devuelve algún resultado..
+    if(resultado != 0){
+        //..muestro los resultados obtenidos
+        res.send(resultado)
+    }else {
+        res.send(`El término ${termino} no se encuentra en tu base de datos de usuarios`)
+    }
+};
 
 
 

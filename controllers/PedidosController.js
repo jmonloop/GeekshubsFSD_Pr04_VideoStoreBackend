@@ -8,17 +8,35 @@ PedidosController.hacerNuevoPedido = (req,res) => {
     //Capturo el body
     let body = req.body;
 
-    //Creo un nuevo elemento Order con los datos que llegan por
-    Order.create({
-        price: body.price,
+    //Creo un nuevo elemento Pedido con los datos que llegan por body
+    Pedido.create({
         peliculaId: body.peliculaId,
         usuarioId: body.usuarioId,
-        fecha: body.fecha
+        precio: body.precio,
+        fechaSalida: body.fechaSalida,
+        fechaDevolucion: body.fechaDevolucion
+
+
+        // {
+        //     "id": 256, 
+        //     "peliculaId": 60599,
+        //     "usuarioId": 206,
+        //     "precio": 3,
+        //     "fechaSalida": "2022-02-26",
+        //     "fechaDevolucion": "2022-03-10"
+        // }
+
     })
     .then(pedido => {
+        //Si se cumple la promesa..
         if(pedido){
-            //Muestro el pedido por Postman
-            res.send(pedido)
+            //Genero un mensaje
+            let mensaje = "Se ha creado un pedido con las siguientes características:"
+            //Envío por postman el mensaje y los datos de pedido
+            res.json({
+                mensaje,
+                pedido
+            })
         }else{
             res.send("La creación de un nuevo pedido ha fallado");
         }
