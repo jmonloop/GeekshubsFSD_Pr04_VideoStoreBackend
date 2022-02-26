@@ -118,7 +118,14 @@ class PeliculaClass {
     }
 
 
-    
+    //Busco pelicula en TMDB por título usando query
+    APItraePorTitulo = async (titulo) => {
+        //Hago la llamada al endpoint de TMDB interpolando la API_KEY y el valor de búsqueda.
+        let resultados = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${titulo}&page=1&include_adult=false`);
+
+        return(resultados.data);
+
+    }
 
 
 
@@ -126,88 +133,6 @@ class PeliculaClass {
 }
 
 
-// // MÉTODO POST PARA REGISTRAR PELÍCULA EN BBDD
-// PeliculasController.registra = (req, res) => {
-//     //Capturo las variables que llegan por el json de body
-    // let title = req.body.title;
-    // let synopsis = req.body.synopsis;
-    // let adult = req.body.adult;
-    // let popularity = req.body.popularity;
-    // let image = req.body.image;
-
-    // //Hago un findAll de la tabla Pelicula
-    // Pelicula.findAll({
-    //     //Donde el atributo title se compara con el title que llega por body
-    //     where : {title : title}
-
-//     }).then(peliculaRepetida => {
-//         //Si no la encuentra (array vacío)...
-//         if(peliculaRepetida == 0) {
-//             //Crea un elemento nuevo en la tabla Pelicula
-//             Pelicula.create({
-//                 //guardando en cada atributo los datos que llegan por body
-//                 title : title,
-//                 synopsis : synopsis,
-//                 adult : adult,
-//                 popularity : popularity,
-//                 image : image
-//             }).then(pelicula => {
-//                 //Y envío un mensaje de confirmación
-//                 res.send(`La pelicula ${pelicula.dataValues.title}, ha sido registrada correctamente`);
-//             }).catch((error) => {
-//                 res.send(error);
-//             });
-//         //Si la encuentra...
-//         }else {
-//             //Envío mensaje de que ya existe en la BBDD
-//             res.send(`La pelicula ${peliculaRepetida[0].title}, ya está registrada en la base de datos`);
-//         }
-        
-//     }).catch(error => {
-//         res.send(error)
-//     });
-// // {
-// //     "title": "El silencio de los corderos",
-// //     "synopsis": "Un tío muy carismático que come personas",
-// //     "adult" : true,
-// //     "popularity": 7.3,
-// //     "image": "stringIMAGE"
-// // }
-// };
-
-// // MÉTODO DELETE PARA BORRAR TODAS LAS PELICULAS DE LA BBDD
-// PeliculasController.borraTodas = (req, res) => {
-//     try {
-//         Pelicula.destroy({
-//             where : {}, //No se especifica ningún elemento ya que queremos borrarlos todos
-//             truncate : false //Resetea todas las pk
-//         }).then(elmnt =>{
-//             res.send(`Se han eliminado ${elmnt} peliculas`);
-//         });
-//     } catch (error) {
-//         res.send(error);
-//     };
-// }
-
-// // MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR TITULO USANDO QUERY
-// PeliculasController.APItraePorTitulo = async (req, res) => {
-//     console.log('entra')
-//     //En la variable busqueda guardamos lo que llega por query, es decir:
-//     //http://localhost:3000/peliculas/titulo?criterio=TITULO
-//     let busqueda = req.query.criterio;
-
-//     try {
-//         //Hacemos la llamada al endpoint de TMDB interpolando la API_KEY y el valor de búsqueda.
-//         let resultados = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${busqueda}&page=1&include_adult=false`);
-
-//         res.send(resultados.data);
-        
-
-//     } catch (error) {
-//         console.log(error);
-//     }
-
-// }
 
 // // MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR ID USANDO PARAMS
 // PeliculasController.APItraePorId = async (req, res) => {

@@ -54,7 +54,19 @@ router.delete('/', async(req, res) => {
 
 //http://localhost:3000/peliculas/titulo?criterio=tituloPelicula
 //Traer peliculas de TMDB por titulo usando query
-// router.get('/titulo', PeliculasController.APItraePorTitulo);
+router.get('/titulo', async(req, res) => {
+    try {
+        //En la variable busqueda guardamos lo que llega por query, es decir:
+        //http://localhost:3000/peliculas/titulo?criterio=TITULO
+        let busqueda = req.query.criterio;
+        res.json(await PeliculasController.APItraePorTitulo(busqueda))
+
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 
 
 
