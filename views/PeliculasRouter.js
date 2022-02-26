@@ -68,17 +68,31 @@ router.get('/titulo', async(req, res) => {
     }
 });
 
-
-
-
 //http://localhost:3000/peliculas
 //Coge las películas más votadas de TMDB (5 primeras páginas)
-// router.get('/toprated', PeliculasController.APItopRated);
+router.get('/toprated', async(req, res) => {
+    try {
+        res.json(await PeliculasController.APItopRated())
 
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 
 //http://localhost:3000/peliculas/cantidad
 //Muestra el número total de películas que hay registradas en nuestra BBDD
-// router.get('/cantidad', PeliculasController.muestraCantidad);
+router.get('/cantidad', async(req, res) => {
+    try {
+        res.json(await  PeliculasController.muestraCantidad())
+        
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 
 
 //http://localhost:3000/peliculas/idPeliculaEnTMDB GET

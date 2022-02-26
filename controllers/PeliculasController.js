@@ -26,7 +26,7 @@ const minMaxRoundedRandom = (min, max) => {
 class PeliculaClass {
     constructor(){
 
-    }
+    };
 
     //Clono 500 películas aleatorias de TMDB adaptando los campos a los de mi BBDD
     clona = async () => {
@@ -57,7 +57,7 @@ class PeliculaClass {
         }
 
         return (`Se han clonado exitosamente ${25} páginas, con un total de ${500} peliculas`)
-    }
+    };
 
     //Registro pelicula con los parámetros que llegan por body
     registra = async (title, synopsis, adult, popularity, image) => {
@@ -103,7 +103,7 @@ class PeliculaClass {
     // //     "image": "stringIMAGE"
     // // }
 
-    }
+    };
 
     //Borro todas las películas de mi BBDD
     borraTodas = async () => {
@@ -115,8 +115,7 @@ class PeliculaClass {
                 return  (`Se han eliminado ${elmnt} peliculas`)
             })    
         )
-    }
-
+    };
 
     //Busco pelicula en TMDB por título usando query
     APItraePorTitulo = async (titulo) => {
@@ -125,46 +124,49 @@ class PeliculaClass {
 
         return(resultados.data);
 
-    }
+    };
 
+    //Muestro 5 primeras páginas de las películas más valoradas de TMDB
+    APItopRated = async () => {
+        //Declaro array vacío que es donde guardaremos el json con el listado de películas
+        const ratedArr = [];
 
+        //Creamos un bucle for e iteramos el valor de page para que nos saque las 5 primeras páginas de rated
+        for(let i=1 ; i<6 ; i++){
+            //llamada por axios al endpoint de TMDB interpolando la API_KEY
+            let results = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${i}`);
+            ratedArr.push(results.data)
+        }
+        
+        //Muestro el array de páginas generado
+        return (ratedArr);
+    };
+
+    //Muestro el número total de películas registradas en nuestra BBDD
+    muestraCantidad = async () => {
+        //declaro el string que forma la consulta de SQL
+        let consulta = `SELECT COUNT(*) FROM peliculas;`;
+
+        //genero el método de sequelize para hacer a consulta SQL en crudo
+        let resultado = await Pelicula.sequelize.query(consulta,{
+            //Esta línea es para que no devuelva resultados duplicados
+            type: Pelicula.sequelize.QueryTypes.SELECT});
+
+        //Si obtengo respuesta de la consulta..
+        if(resultado){
+            //..accedo al valor para saber el total de elementos
+            let valor = resultado[0]['COUNT(*)']
+            if(valor > 0) {
+                return (`Hay un total de ${valor} peliculas registradas en la base de datos`);
+            }else {
+                return(`No hay niguna pelicula registrada en la base de datos`)
+            };
+        };
+    };
 
 
 }
 
-
-
-// // MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR ID USANDO PARAMS
-// PeliculasController.APItraePorId = async (req, res) => {
-//     //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
-//     let id = req.params.id
-
-//     try {
-//         let results = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
-
-//         res.send(results.data)
-
-//     } catch(error) {
-//         res.send(error)
-//     }
-// };
-
-// // //MÉTODO GET PARA MOSTRAR LAS 5 PRIMERAS PÁGINAS DE LAS PELÍCULAS MÁS VALORADAS DE TMDB
-// http://localhost:3000/peliculas/toprated GET
-// PeliculasController.APItopRated = async (req, res) => {
-//     const ratedArr = []; //Declaro array vacío que es donde guardaremos el json con el listado de películas
-//     try {
-//         //Creamos un bucle for e iteramos el valor de page para que nos saque las 5 primeras páginas de rated
-//         for(let i=1 ; i<6 ; i++){
-//             //llamada por axios al endpoint de TMDB interpolando la API_KEY
-//             let results = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${i}`);
-//             ratedArr.push(results.data)
-//         }//Muestro el array de páginas
-//         res.send(ratedArr);
-//     } catch(error) {
-//         res.send(error);
-//     };
-// };
 
 // // //MÉTODO GET PARA MOSTRAR LA CANTIDAD DE PELICULAS QUE TENEMOS REGISTRADAS EN NUESTRA BBDD
 // http://localhost:3000/peliculas/cantidad GET
@@ -184,6 +186,26 @@ class PeliculaClass {
 //         }
 //     }
 // }
+
+
+// // MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR ID USANDO PARAMS
+// PeliculasController.APItraePorId = async (req, res) => {
+//     //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
+//     let id = req.params.id
+
+//     try {
+//         let results = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
+
+//         res.send(results.data)
+
+//     } catch(error) {
+//         res.send(error)
+//     }
+// };
+
+
+
+
 
 
 
