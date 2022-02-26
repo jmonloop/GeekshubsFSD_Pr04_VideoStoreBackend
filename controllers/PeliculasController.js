@@ -164,6 +164,32 @@ class PeliculaClass {
         };
     };
 
+    //Busco y muestro películas de nuestra BBDD con palabra coincidente usando query
+    buscaPorTermino = async (termino) => {
+
+        //declaro el string que forma la consulta de SQL
+        let consulta = 
+            `SELECT * FROM videoclub.peliculas
+            WHERE title LIKE '%${termino}%'
+            OR synopsis LIKE '%${termino}%'`;
+
+        //genero el método de sequelize para hacer a consulta SQL en crudo
+        let resultado = await Pelicula.sequelize.query(consulta,{
+            //Esta línea es para que no devuelva resultados duplicados
+            type: Pelicula.sequelize.QueryTypes.SELECT});
+
+        //Si la consulta devuelve algún resultado..
+        if(resultado != 0){
+            //..muestro los resultados obtenidos
+            console.log(resultado)
+           return resultado
+        }else {
+            return (`El término ${termino} no se encuentra en tu base de datos de películas`)
+        }
+
+    };
+
+
     //Busco y muestro película de TMDB por id usando params
     APItraePorId = async (id) => {
         //Hago llamada al endpoint de TMDB interpolando el id que nos llega por params
