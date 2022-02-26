@@ -6,28 +6,32 @@ const { Pelicula } = require('../models/index');
 const { Op } = require("sequelize");
 //Importo compareSync desestructurado usando la clase bcrypt para poder comparar variables encriptadas
 const { compareSync } = require("bcrypt");
-const { format } = require("express/lib/response");
+const { format, json } = require("express/lib/response");
 //Declaro la API_KEY necesaria para ejecutar endpoints en TMDB
 const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
 //Declaro el objeto PeliculasController (siempre igual para cada controller)
 const PeliculasController = {};
 
+//Declaro función para obtener número random entre dos límites
+const minMaxRoundedRandom = (min, max) => {
+    return Math.round(Math.random() * (max - min) + min);
+}
 
 
-//MÉTODO GET PARA CLONAR LA BBDD DE TMDB ADAPTÁNDOLA A NUESTRA BBDD
+//MÉTODO GET PARA CLONAR 500 PELICULAS DE TMDB ADAPTANDO lOS CAMPOS A NUESTRA BBDD
 //http://localhost:3000/peliculas/toprated GET
-PeliculasController.clonaPeliculas = async (req, res) => {
-    // const tmdb = []; //Declaro array vacío que es donde guardaremos el json con el listado de películas
+PeliculasController.clona = async (req, res) => {
     try {
-        // }//Variable para añadir a la imagen de TMDB
+        // }//Variable para añadir a la imagen de TMDB y guardarla en nuestra BBDD
         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
         //Lanzo axios una vez para capturar la cantidad de páginas total que voy a tener que recorrer
         let firstScan = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
-        //Guardo el total de páginas que necesito recorrer
-        // let numbOfPagesTMDB = firstScan.data.total_pages
-        // let numbOfFilmsTMDB = firstScan.data.total_results
-        for(let j=1 ; j<=500 ; j++) {
-            let resultados = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${j}&with_watch_monetization_types=flatrate`);
+        // Guardo el total de páginas que necesito recorrer
+        let numbOfPagesTMDB = firstScan.data.total_pages
+        let numbOfFilmsTMDB = firstScan.data.total_results
+
+        for(let j=1 ; j<=25 ; j++) {
+            let resultados = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
         
             //Variable para saber los resultados por página
             let numbOfResultsPerPageTMDB = resultados.data.results.length
@@ -45,14 +49,14 @@ PeliculasController.clonaPeliculas = async (req, res) => {
         }
         
         
-        res.send(`Se han clonado exitosamente ${500} páginas, con un total de ${10000} peliculas`);
+        res.send(`Se han clonado exitosamente ${25} páginas, con un total de ${500} peliculas`);
     } catch(error) {
         res.send(error);
     };
 };
 
 //MÉTODO POST PARA REGISTRAR PELÍCULA EN BBDD
-PeliculasController.registraPelicula = (req, res) => {
+PeliculasController.registra = (req, res) => {
     //Capturo las variables que llegan por el json de body
     let title = req.body.title;
     let synopsis = req.body.synopsis;
@@ -101,7 +105,7 @@ PeliculasController.registraPelicula = (req, res) => {
 };
 
 //MÉTODO DELETE PARA BORRAR TODAS LAS PELICULAS DE LA BBDD
-PeliculasController.borrarTodasPeliculas = (req, res) => {
+PeliculasController.borraTodas = (req, res) => {
     try {
         Pelicula.destroy({
             where : {}, //No se especifica ningún elemento ya que queremos borrarlos todos
@@ -115,7 +119,7 @@ PeliculasController.borrarTodasPeliculas = (req, res) => {
 }
 
 //MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR TITULO USANDO QUERY
-PeliculasController.APItraePeliculaPorTitulo = async (req, res) => {
+PeliculasController.APItraePorTitulo = async (req, res) => {
     console.log('entra')
     //En la variable busqueda guardamos lo que llega por query, es decir:
     //http://localhost:3000/peliculas/titulo?criterio=TITULO
@@ -135,7 +139,7 @@ PeliculasController.APItraePeliculaPorTitulo = async (req, res) => {
 }
 
 //MÉTODO GET PARA BUSCAR PELICULA EN TMDB POR ID USANDO PARAMS
-PeliculasController.APItraePeliculaPorId = async (req, res) => {
+PeliculasController.APItraePorId = async (req, res) => {
     //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
     let id = req.params.id
 
@@ -148,11 +152,6 @@ PeliculasController.APItraePeliculaPorId = async (req, res) => {
         res.send(error)
     }
 };
-
-
-
-
-
 
 //MÉTODO GET PARA MOSTRAR LAS 5 PRIMERAS PÁGINAS DE LAS PELÍCULAS MÁS VALORADAS DE TMDB
 //http://localhost:3000/peliculas/toprated GET
@@ -171,97 +170,28 @@ PeliculasController.APItopRated = async (req, res) => {
     };
 };
 
+//MÉTODO GET PARA MOSTRAR LA CANTIDAD DE PELICULAS QUE TENEMOS REGISTRADAS EN NUESTRA BBDD
+//http://localhost:3000/peliculas/cantidad GET
+PeliculasController.muestraCantidad = async (req, res) => {
+    let consulta = `SELECT COUNT(*) FROM peliculas;`;
 
+    let resultado = await Pelicula.sequelize.query(consulta,{
+        //Esta línea es para que no devuelva resultados duplicados
+        type: Pelicula.sequelize.QueryTypes.SELECT});
 
-
-
-
-
-
-
-
-
-
-PeliculasController.traeNovedades = async (req, res) => {
-
-    try {
-
-        let resultados = await axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=es-ES&page=1");
-
-        res.send(resultados.data);
-
-    } catch (error) {
-        console.log(error);
+    if(resultado){
+        let valor = resultado[0]['COUNT(*)']
+        if(valor > 0) {
+            res.send(`Hay un total de ${valor} peliculas registradas en la base de datos`);
+        }else {
+            res.send(`No hay niguna pelicula registrada en la base de datos`)
+        }
     }
 }
 
-PeliculasController.favouriteFilms = (req,res) => {
 
 
-    let titulo = req.query.titulo;
-    let adult = req.query.adult;
-    let popularity = req.query.popularity;
 
-    Pelicula.findAll({
-        where : {
-
-            [Op.and] : [
-                {
-                    titulo : {
-                        [Op.like] : titulo
-                    }
-                },
-                {
-                    adult : {
-                        [Op.like] : adult
-                    }
-                },
-                {
-                    popularity : {
-                        [Op.like] : popularity
-                    }
-                }
-            ]
-
-        }
-    }).then(films => {
-
-        if(films != 0){
-            res.send(films);
-        }else {
-            res.send(`Película no encontrada`);
-        };
-
-    }).catch(error => {
-        res.send(error);
-    })
-}
-
-PeliculasController.peliculasAdultas = (req,res) => {
-
-    //todas las películas que no sean para niños
-
-    Pelicula.findAll({
-        where : {
-            [Op.not] : [
-                {
-                    adult : {
-                        [Op.like] : 0
-                    }
-                }
-            ]
-        }
-    }).then(peliculasAdultas => {
-        if(peliculasAdultas != 0){
-            res.send(peliculasAdultas);
-        }else {
-            res.send("No hay películas que no sean para niños");
-        }
-    }).catch(error =>{
-        res.send(error)
-    })
-
-}
 
 //Exporto PeliculasController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = PeliculasController;
