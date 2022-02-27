@@ -82,6 +82,30 @@ PedidosController.creaPorQuery = (req,res) => {
     }))
 }
 
+//MÉTODO GET PARA TRAER UN INFORME COMPLETO DE PEDIDOS
+PedidosController.informeCompleto = async (req,res) => {
+    //Escribimos la consulta en formato SQL.
+    let consulta = 
+    `SELECT pedidos.id AS NumeroPedido, pedidos.precio AS precio, usuarios.name AS nombreUsuario, usuarios.email AS emailUsuario, peliculas.title AS tituloPelicula, pedidos.fechaSalida AS fechaSalida
+    FROM usuarios 
+    INNER JOIN pedidos ON usuarios.id = pedidos.usuarioId
+    INNER JOIN peliculas ON peliculas.id = pedidos.peliculaId 
+    ORDER BY fechaSalida ASC`;
+
+
+
+
+    //El resultado viene de una función asincrona de sequelize llamada query que sirve para realizar consultas en crudo, en vez de usar métodos propios de sequelize como el findAll o los condiciones Op.or
+    let resultado = await Pedido.sequelize.query(consulta,{
+        //Esta línea es para que no devuelva resultados duplicados
+        type: Pedido.sequelize.QueryTypes.SELECT});
+
+    if(resultado){
+        res.send(resultado);
+    }
+
+}
+
 //MÉTODO GET PARA TRAER UN INFORME DE PEDIDOS POR USUARIO USANDO PARAMS
 PedidosController.informePorUsuario = async (req,res) => {
     let usuario = req.params.usuario
@@ -92,30 +116,22 @@ PedidosController.informePorUsuario = async (req,res) => {
     INNER JOIN pedidos ON usuarios.id = pedidos.usuarioId
     INNER JOIN peliculas ON peliculas.id = pedidos.peliculaId 
     WHERE name LIKE '%${usuario}%'`;
-    // ORDER BY top_rated DESC`; 
 
     /////////////////// EXPLICACIÓN DE LA CONSULTA SQL \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     //Esta línea describe qué atributo queremos y qué nombre va a tener en el informe
-    // SELECT usuarios.name AS nombre, peliculas.titulo AS titulo , peliculas.popularity AS top_rated, usuarios.nickname AS Nick, usuarios.email AS correo
+    // SELECT usuarios.name AS nombre, peliculas.title AS titulo , pedidos.fechaDevolucion AS fechaDevolucion, usuarios.nickname AS nickname, usuarios.email AS correo
     
     // En esta que vamos a juntar la tabla "usuarios" (siempre empezar por una tabla master)...
     // FROM usuarios 
 
-    //...con la tabla "orders" (tabla esclava) mediante estas pk/fk
-    // INNER JOIN orders ON usuarios.id = orders.usuarioId
+    //...con la tabla "pedidos" (tabla esclava) mediante estas pk/fk
+    // INNER JOIN pedidos ON usuarios.id = pedidos.usuarioId
 
     //... y con la tabla "peliculas (la otra tabla master) mediante estas pk/fk
     // INNER JOIN peliculas ON peliculas.id = orders.peliculaId 
 
-    //...que el atributo de popularidad sea mayor que 6
-    // WHERE popularity > 6 
-
-    //y que el atributo de nombre empiece por 'Ra'
-    // AND name LIKE '%Ra%' 
-
-    //y que esté ordenado de mayor a menor (por nombre)
-    // ORDER BY top_rated DESC;
-
+    //...que el atributo nombre coincida con la variable usuario
+    // WHERE name LIKE '%${usuario}%' 
 
 
     //El resultado viene de una función asincrona de sequelize llamada query que sirve para realizar consultas en crudo, en vez de usar métodos propios de sequelize como el findAll o los condiciones Op.or

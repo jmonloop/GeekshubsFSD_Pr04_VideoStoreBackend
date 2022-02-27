@@ -14,6 +14,10 @@ router.post('/', isAdmin, PedidosController.creaPorBody);
 router.post('/query', PedidosController.creaPorQuery);
 
 //http://localhost:3000/pedidos (usando un GET)
+//Realiza una consulta SQL para mostrar un informe completo de todos los pedidos con todas los atrtibutos de película y usuario
+router.get('/', PedidosController.informeCompleto);
+
+//http://localhost:3000/pedidos (usando un GET)
 //Realiza una consulta SQL para mostrar un informe con todos los pedidos de un usuario usando params
 router.get('/:usuario', PedidosController.informePorUsuario);
 
