@@ -219,8 +219,9 @@ UsersController.deleteAll = async (req, res) => {
 UsersController.deleteById = async (req, res) => {
     //Busco el usuario en mi BBDD
     try {
+        let id = req.params.id
         User.findOne({
-            where : {id : req.params.id}
+            where : {id : id}
             //Se resuelve la promesa de sequelize
         }).then(elmnt => {
             //Si devuelve un valor que no sea null...

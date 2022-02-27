@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "895f5935-cfef-4464-bdc2-c785739fb42e",
-		"name": "videoStore",
+		"_postman_id": "086a4f71-3ea9-4968-ba02-36919bc89fd6",
+		"name": "videoStore Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -31,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"clave\" : \"valor\"\r\n}",
+					"raw": "{\r\n    \"key\" : \"value\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -59,7 +59,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "        {\r\n            \"name\":\"John\",\r\n            \"surname\":\"Frusciante\",\r\n            \"age\":45,\r\n            \"email\": \"jfrusci@gmail.com\",\r\n            \"nickname\":\"jhonfrus\",\r\n            \"password\":\"1234\",\r\n            \"rol\":\"client\"\r\n        }\r\n        ",
+					"raw": "        {\r\n            \"name\":\"John\",\r\n            \"surname\":\"Frusciante\",\r\n            \"age\":51,\r\n            \"email\": \"jfrusci@gmail.com\",\r\n            \"nickname\":\"jhonfrus\",\r\n            \"password\":\"1234\",\r\n            \"rol\":\"client\"\r\n        }\r\n        ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,7 +67,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/register",
+					"raw": "http://localhost:3000/users/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -88,7 +88,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"fake@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"email\":\"jfrusci@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -111,14 +111,14 @@
 			"response": []
 		},
 		{
-			"name": "USERS: Get profile by email",
+			"name": "USERS: Get user by email",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyMDQsIm5hbWUiOiJKYXZpIiwic3VybmFtZSI6Ik1vbmxlw7NuIiwiYWdlIjozMiwiZW1haWwiOiJmYWxzb0BnbWFpbC5jb20iLCJuaWNrbmFtZSI6Imptb25sb29wIiwicGFzc3dvcmQiOiIkMmIkMTAkTEpWU2ZqOTZteXU1UXY2Q2VlWlRzLjloZmJudlZyZ0VRbVRwVmdxZjZ1V1hveVFIY05CejIiLCJyb2wiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDItMjNUMjM6MjQ6MTIuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjItMDItMjNUMjM6MjQ6MTIuMDAwWiJ9LCJpYXQiOjE2NDU2NjAwNTIsImV4cCI6MTY0NTc0NjQ1Mn0.AnifhPdX4VEwuA3XPB3RgM9C2vzRsgmZYrsQ5ZTp27Y",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1MSwibmFtZSI6IkpvaG4iLCJzdXJuYW1lIjoiRnJ1c2NpYW50ZSIsImFnZSI6NTEsImVtYWlsIjoiamZydXNjaUBnbWFpbC5jb20iLCJuaWNrbmFtZSI6Impob25mcnVzIiwicGFzc3dvcmQiOiIkMmIkMTAkb2RoU0RRaVFUeWRuMXFmZW5tOTRoLk5JMGlES0NvRENTUXRuc0lDc0RJblRnMVpsMENpVDYiLCJyb2wiOiJjbGllbnQiLCJjcmVhdGVkQXQiOiIyMDIyLTAyLTI3VDAzOjExOjMzLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTAyLTI3VDAzOjExOjMzLjAwMFoifSwiaWF0IjoxNjQ1OTMxNTQ0LCJleHAiOjE2NDYwMTc5NDR9.i4fHTaJ606IDVX5Ore494geES-7CST8N9d7MbGQQIRA",
 							"type": "string"
 						}
 					]
@@ -126,7 +126,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/usuarios/email/fake@gmail.com",
+					"raw": "http://localhost:3000/users/email/fake@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -159,7 +159,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/profile/jmonloop",
+					"raw": "http://localhost:3000/users/profile/jmonloop",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -181,7 +181,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"id\" : 204}",
+					"raw": "{\"id\" : 52}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -230,7 +230,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Anthony\",\r\n    \"surname1\":\"Kiedis\",\r\n    \"apellido2\":\"Boss\",\r\n    \"edad\":59,\r\n    \"email\": \"akeidis@hotmail.com\",\r\n    \"nickname\":\"akeidis\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -266,11 +266,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1MSwibmFtZSI6IkpvaG4iLCJzdXJuYW1lIjoiRnJ1c2NpYW50ZSIsImFnZSI6NTEsImVtYWlsIjoiamZydXNjaUBnbWFpbC5jb20iLCJuaWNrbmFtZSI6Impob25mcnVzIiwicGFzc3dvcmQiOiIkMmIkMTAkb2RoU0RRaVFUeWRuMXFmZW5tOTRoLk5JMGlES0NvRENTUXRuc0lDc0RJblRnMVpsMENpVDYiLCJyb2wiOiJjbGllbnQiLCJjcmVhdGVkQXQiOiIyMDIyLTAyLTI3VDAzOjExOjMzLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTAyLTI3VDAzOjExOjMzLjAwMFoifSwiaWF0IjoxNjQ1OTMxNTQ0LCJleHAiOjE2NDYwMTc5NDR9.i4fHTaJ606IDVX5Ore494geES-7CST8N9d7MbGQQIRA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":\"Luigi\",\r\n    \"surname1\":\"Minardi\",\r\n    \"surname2\":\"Siman\",\r\n    \"age\":19,\r\n    \"email\": \"luigi@hotmail.com\",\r\n    \"nickname\":\"LMS\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Luigi\",\r\n    \"surname\":\"Minardi\",\r\n    \"age\":19\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +288,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/profile/",
+					"raw": "http://localhost:3000/users/profile/53",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -287,7 +297,7 @@
 					"path": [
 						"users",
 						"profile",
-						""
+						"53"
 					]
 				}
 			},
@@ -340,7 +350,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/custom/15",
+					"raw": "http://localhost:3000/users/custom/k",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -349,7 +359,7 @@
 					"path": [
 						"users",
 						"custom",
-						"15"
+						"k"
 					]
 				}
 			},
@@ -361,15 +371,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films/toprated",
+					"raw": "http://localhost:3000/films",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"films",
-						"toprated"
+						"films"
 					]
 				}
 			},
@@ -440,7 +449,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/peliculas/titulo?arg=fast",
+					"raw": "http://localhost:3000/films/title?arg=ali",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -453,7 +462,7 @@
 					"query": [
 						{
 							"key": "arg",
-							"value": "fast"
+							"value": "ali"
 						}
 					]
 				}
@@ -506,7 +515,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas/custom?arg=top",
+					"raw": "http://localhost:3000/films/custom?arg=fight",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -519,7 +528,7 @@
 					"query": [
 						{
 							"key": "arg",
-							"value": "top"
+							"value": "fight"
 						}
 					]
 				}
@@ -553,7 +562,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "        {\r\n            \"id\": 256,\r\n            \"filmId\": 60599,\r\n            \"userId\": 206,\r\n            \"price\": 3,\r\n            \"outDate\": \"2022-02-26\",\r\n            \"returnDate\": \"2022-03-10\"\r\n        }",
+					"raw": "        {\r\n            \"id\": 103,\r\n            \"filmId\": 543,\r\n            \"userId\": 94,\r\n            \"price\": 3,\r\n            \"outDate\": \"2022-02-01\",\r\n            \"returnDate\": \"2022-03-10\"\r\n        }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -589,7 +598,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders/query?filmId=60599&userId=206&price=4&outDate=2022-03-01&returnDate=2022-03-15",
+					"raw": "http://localhost:3000/orders/query?filmId=369&userId=60&price=2&outDate=2021-08-11&returnDate=2022-03-15",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -602,19 +611,19 @@
 					"query": [
 						{
 							"key": "filmId",
-							"value": "60599"
+							"value": "369"
 						},
 						{
 							"key": "userId",
-							"value": "206"
+							"value": "60"
 						},
 						{
-							"key": "precio",
-							"value": "4"
+							"key": "price",
+							"value": "2"
 						},
 						{
 							"key": "outDate",
-							"value": "2022-03-01"
+							"value": "2021-08-11"
 						},
 						{
 							"key": "returnDate",
@@ -643,7 +652,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders/caria",
+					"raw": "http://localhost:3000/orders/arlie",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -651,7 +660,7 @@
 					"port": "3000",
 					"path": [
 						"orders",
-						"caria"
+						"arlie"
 					]
 				}
 			},
@@ -703,7 +712,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders/10",
+					"raw": "http://localhost:3000/orders/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -711,7 +720,7 @@
 					"port": "3000",
 					"path": [
 						"orders",
-						"10"
+						"2"
 					]
 				}
 			},

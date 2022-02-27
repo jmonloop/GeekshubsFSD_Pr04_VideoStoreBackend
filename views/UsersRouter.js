@@ -55,7 +55,7 @@ router.delete('/', isAdmin, UsersController.deleteAll);
 
 //http://localhost:3000/usuarios/idUsuario (usando un DELETE)
 //Recibe por URL/params un id de usuario y lo borra de la BBDD por ID solo si el usuario está logueado (auth)
-router.delete('/:id', UsersController.deleteById);
+router.delete('/:id', auth, UsersController.deleteById);
 // router.delete('/:id', auth, UsuariosController.borrarPorId);
 
 //http://localhost:3000/usuarios/profile/idUsuario (usando un PUT)
