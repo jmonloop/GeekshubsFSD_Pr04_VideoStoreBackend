@@ -17,9 +17,7 @@ const sequelize = new Sequelize(
             idle: 10000 // maximum time, in milliseconds, that pool will try to get connection before throwing error
         },
     }
-);
-
-//Exporto sequelize.authenticate() para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
+); 
 module.exports = sequelize.authenticate()
 .then((db)=>{
     console.log('MYSQL connected'); 
