@@ -93,9 +93,10 @@ To execute this type of requests you need to:
     2. Copy the token responsed by Postman
     3. In the request which needs authetication, go to "Authorization", click in "Type" tab 
     and select "Bearer Token" option.
-    ![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_auth.jpg)
     4. Paste the token in the field.
     5. Send request
+![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_auth.jpg)
+
 * NOTE: In this type of endopoints "auth is required" will be mentioned.
 
 ### Admin role requests
@@ -174,48 +175,11 @@ enviromente variables and "bcrypt" package have been used for this purpose.
     
 
 
+## Thanks
+* Thanks to everyone who spends time spreading their knowledge in Stack Overflow.
 
-### Sources Credits
-Player 2 textures:
-<a href='https://pngtree.com/so/pastel'>pastel png from pngtree.com/</a>
+* Thanks to <a href='https://www.mockaroo.com/'>mockaroo</a> website for providing such an excellent service for generating seeders.
 
-Player 1 brick textures:
-<a href='https://pngtree.com/so/brick'>brick png from pngtree.com/</a>
-
-Sky textures:
-<a href='https://pngtree.com/so/clouds'>clouds png from pngtree.com/</a>
-
-Custom pointer:
-<a href='https://pngtree.com/so/red'>red png from pngtree.com/</a>
-
-Main and final themes:
-<a href='https://www.youtube.com/watch?v=LMQ8sSvqphg'>https://www.youtube.com/watch?v=LMQ8sSvqphg</a>
-
-Quake voices:
-<a href='https://www.youtube.com/watch?v=ym4VmVwd24c'>https://www.youtube.com/watch?v=ym4VmVwd24c</a>
-
-Healing SFX:
-<a href='https://www.youtube.com/watch?v=idVg3eKcbL0'>https://www.youtube.com/watch?v=idVg3eKcbL0</a>
-
-xVision SFX:
-<a href='https://www.youtube.com/watch?v=TC0KTDMPx5E'>https://www.youtube.com/watch?v=TC0KTDMPx5E</a>
-
-ak47 SFX:
-<a href='https://www.youtube.com/watch?v=1otAua9XIPs'>https://www.youtube.com/watch?v=1otAua9XIPs</a>
-<a href='https://www.youtube.com/watch?v=gjbgJNQP6_M'>https://www.youtube.com/watch?v=gjbgJNQP6_M</a>
-
-Mp5 SFX:
-<a href='https://www.youtube.com/watch?v=q7uojrDfEvw'>https://www.youtube.com/watch?v=q7uojrDfEvw</a>
-
-Desert Eagle SFX:
-<a href='https://www.youtube.com/watch?v=sHffVHCiUto'>https://www.youtube.com/watch?v=sHffVHCiUto</a>
-
-AA12 SFX:
-<a href='https://www.youtube.com/watch?v=MYbnuaifdN0'>https://www.youtube.com/watch?v=MYbnuaifdN0</a>
-
-
-
-### Thanks
 * Thanks to GeeksHubs Academy for the training received (https://github.com/GeeksHubsAcademy)
 
 * Thanks to everyone who spends time spreading their knowledge in Stack Overflow.
