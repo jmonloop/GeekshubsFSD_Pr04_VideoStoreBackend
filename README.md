@@ -52,7 +52,7 @@ Therefore two different API restful programming methods have been used:
 
 5 Expand the new videoStore tab and all the endpoints will be shown
 
-![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_collection.JPG)
+![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_collection.jpg)
 
 ### Visual Studio Code config
 1 In ../config/config.json change "username" and "password" according to the ones you selected for your MySQL project in the "development" object.
