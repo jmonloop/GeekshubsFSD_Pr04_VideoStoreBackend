@@ -1,16 +1,21 @@
-//Importo el modelo Usuario desestructurado (en formato objeto) para poder escribir en la tabla Usuario de la BBDD
+//Imports
 const { User } = require('../models/index');
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
-const UsersController = {};
-    UsersController.getUsers = (req, res) => {
-    User.findAll()
-    .then(data => {
 
-        res.send(data)
-    });
+//UserController object declaration
+const UsersController = {};
+
+
+//Controller Functions
+UsersController.getUsers = (req, res) => {
+User.findAll()
+.then(data => {
+
+    res.send(data)
+});
 };
 UsersController.writeRaw = async (req, res) => {
     let body = req.body;
@@ -232,4 +237,6 @@ UsersController.searchByTerm = async (req, res) => {
         res.send(`The term ${arg} is not present at your users database`)
     }
 };
+
+//Export
 module.exports = UsersController;

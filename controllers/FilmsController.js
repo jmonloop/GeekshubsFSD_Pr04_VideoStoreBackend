@@ -1,14 +1,23 @@
-//Importo la clase axios para poder hacer llamadas a otros endpoints
+//Imports
 const axios = require("axios");
+
+//Film model detructured import
 const { Film } = require('../models/index')
+
+//API_KEY necessary for TMDB endpoints
 const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
+
+//Random number between two limits function
 const minMaxRoundedRandom = (min, max) => {
     return Math.round(Math.random() * (max - min) + min);
 }
+
+//Film class where insert logic of the Films endpoints
 class FilmClass {
     constructor(){
-
     };
+
+    //Film methods
     clone = async () => {
         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
         let firstScan = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
@@ -121,12 +130,8 @@ class FilmClass {
 
 }
 
-
-
-
-
-
-
-
+//FilmsController instance
 let FilmsController = new FilmClass();
+
+//Export
 module.exports = FilmsController;

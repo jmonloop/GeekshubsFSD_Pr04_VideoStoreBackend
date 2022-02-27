@@ -1,5 +1,7 @@
-//Importo ../models/index' y lo asigno al modelo Usuario
+//Imports
 const { User } = require('../models/index');
+
+//Export logic
 module.exports = (req, res, next) => {
     let id = req.body.id;
     User.findOne({

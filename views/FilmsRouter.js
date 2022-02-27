@@ -1,6 +1,8 @@
-//Importo la clase express y la guardo en la variable express (siempre igual)
+//Imports
 const router = require('express').Router();
 const FilmsController = require('../controllers/FilmsController');
+
+//Endpoint-FilmController methods links
 router.get('/', async(req, res) => {
     try {
         res.json(await FilmsController.clone())
@@ -88,4 +90,6 @@ router.get('/:id', async(req, res) => {
         })
     }
 });
+
+//Export
 module.exports = router;

@@ -1,6 +1,10 @@
-//Importo el modelo Pedido desestructurado (en formato objeto) para poder escribir en la tabla Pedido de la BBDD
+//Imports
 const { Order } = require('../models/index');
+
+//OrdersController object declaration
 const OrdersController = {};
+
+//Controller Functions
 OrdersController.createByBody = (req,res) => {
     let body = req.body;
     Order.create({
@@ -75,9 +79,13 @@ OrdersController.reportByUser = async (req,res) => {
     let result = await Order.sequelize.query(consult,{
         type: Order.sequelize.QueryTypes.SELECT});
 
-    if(result){
-        res.send(result);
-    }
+  
+        if(result != 0){
+            res.send(result);
+        } else {
+            res.send('There are no fields with the searched term')
+        }
+
 
 }
 OrdersController.fullReport = async (req,res) => {
@@ -118,4 +126,6 @@ OrdersController.deleteById = async (req, res) => {
         res.send(error);
     };
 }
+
+//Export
 module.exports = OrdersController;
