@@ -14,12 +14,11 @@ More than seeking to simulate a real business model, what has been sought is to 
 
 [List of Endpoints](#list-of-endpoints)
 
-[]
-
 [Thanks](#thanks)
 
 
 ## Architecture
+
 As mentioned, I wanted to explore the largest number of options in the same project.
 Therefore two differents methods of programming the API restful have been used:
 
@@ -81,7 +80,7 @@ You can also do it manually: select CRUD method, copy the endpoint URL, configur
 
 ![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_query.jpg)
 
-* In endpoints which "using params" is mentioned you have to introduce the input value at the end of the endpoint.
+* In endpoints which "using params" is mentioned you just have to introduce the input value at the end of the endpoint.
 ### Token requests
 * As Json Web Token authentication has been used, there are some request that need a token to be present in header to authenticate that the user has been login. If you try to send this request without being login first, the request will not take place and a "Denied access" message will be shown:
 
