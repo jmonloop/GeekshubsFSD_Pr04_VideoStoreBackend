@@ -8,7 +8,7 @@ const auth = require("../middlewares/auth");
 const isAdmin = require("../middlewares/isAdmin");
 
 //Importo el fichero UsuariosController y lo guardo en la variable UsuariosController. Luego habrá que crearlo.
-const UsuariosController = require('../controllers/UsuariosController');
+const UsersController = require('../controllers/UsersController');
 
 
 
@@ -21,11 +21,11 @@ const UsuariosController = require('../controllers/UsuariosController');
 
 //http://localhost:3000/usuarios (usando un GET)
 //Muestra en Postman todos los usuarios registrados
-router.get('/', UsuariosController.traeUsuarios);
+router.get('/', UsersController.getUsers);
 
 //http://localhost:3000/usuarios (usando un POST).
 //recibe un json a pelo desde el body de Postman y lo muestra por Postman (sin BBDD)
-router.post('/', UsuariosController.escribeEnCrudo);
+router.post('/', UsersController.writeRaw);
 
 //***************PORQUE ES API RESTFUL*****************************
 //Porque podemos (y es buena práctica hacerlo) repetir un mismo endpoint si se usan distintos métodos. En los dos de arriba, son el mismo endpoint solo que uno es mediante GET y el otro mediante POST
@@ -34,41 +34,41 @@ router.post('/', UsuariosController.escribeEnCrudo);
 
 //http://localhost:3000/usuarios/register (usando un POST).
 //Recibe por body un json con los datos de registro de usuario y los guarda en la BBDD
-router.post('/register', UsuariosController.registraUsuario);
+router.post('/register', UsersController.userRegister);
 
 //http://localhost:3000/usuarios/login (usando un POST)
 //Recibe por body un json con los datos para hacer login y loguea si el usuario existe en la BBDD(las condiciones se ven en la función controladora)
-router.post('/login', UsuariosController.login);
+router.post('/login', UsersController.login);
 
 //http://localhost:3000/usuarios/email/emailDeUsuario (usando un GET).
 //Recibe por URL/params un email y muestra en Postman su perfil solo si el usuario se ha logueado (auth)
-router.get('/email/:email', auth, UsuariosController.traerUsuarioEmail);
+router.get('/email/:email', auth, UsersController.getUserByEmail);
 
 //http://localhost:3000/usuarios/profile/nicknameDeUsuario (usando un GET).
 //Recibe por URL/params un nickname y muestra en Postman su perfil solo si el usuario se ha logueado (auth)
-router.get('/profile/:nickname', auth, UsuariosController.userProfile);
+router.get('/profile/:nickname', auth, UsersController.getUserByNickname);
 
 //http://localhost:3000/usuarios (usando un DELETE)
 //Borra todos los usuarios de la BBDD solo si el usuario es admin (isAdmin)
 // router.delete('/', UsuariosController.borrarTodos);
-router.delete('/', isAdmin, UsuariosController.borrarTodos);
+router.delete('/', isAdmin, UsersController.deleteAll);
 
 //http://localhost:3000/usuarios/idUsuario (usando un DELETE)
 //Recibe por URL/params un id de usuario y lo borra de la BBDD por ID solo si el usuario está logueado (auth)
-router.delete('/:id', UsuariosController.borrarPorId);
+router.delete('/:id', UsersController.deleteById);
 // router.delete('/:id', auth, UsuariosController.borrarPorId);
 
 //http://localhost:3000/usuarios/profile/idUsuario (usando un PUT)
 //Recibe por URL/params un id de usuario y modifica su perfil solo si el usuario está logueado (auth)
-router.put('/profile/:id', auth, UsuariosController.modificarUsuario);
+router.put('/profile/:id', auth, UsersController.modifyUser);
 
 //http://localhost:3000/usuarios/newpassword (usando un PUT)
 //Recibe por body en formato json el id de un usuario, el password actual y el password nuevo para cambiar el password del usuario solo si el usuario está logueado (auth)
-router.put('/newpassword', auth, UsuariosController.updatePassword);
+router.put('/newpassword', auth, UsersController.updatePassword);
 
 //http://localhost:3000/usuarios/custom/terminoABuscar (usando un GET)
 //Recibo por body en formato json los datos de usuario de mi BBDD buscándolo por un término usando params
-router.get('/custom/:termino', UsuariosController.buscaTermino)
+router.get('/custom/:arg', UsersController.searchByTerm)
 
 
 

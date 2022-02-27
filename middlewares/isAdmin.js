@@ -1,5 +1,5 @@
 //Importo ../models/index' y lo asigno al modelo Usuario
-const { Usuario } = require('../models/index');
+const { User } = require('../models/index');
 
 //Exporto la función middleware
 module.exports = (req, res, next) => {
@@ -7,21 +7,21 @@ module.exports = (req, res, next) => {
     let id = req.body.id;
 
     //Busco en la tabla Usuario..
-    Usuario.findOne({
+    User.findOne({
         //..un usuario con esa id
         where : { id : id }
         //Si lo encuentro..
-    }).then(usuarioEncontrado => {
+    }).then(foundUser => {
         //..y su rol es admin...
-        if(usuarioEncontrado.rol == "admin"){
+        if(foundUser.rol == "admin"){
             //..finaliza el middleware y continuará ejecutando el endpoint donde lo pongamos
             next();
             //Si no es admin solo mostrará un mensaje y ese endpoint no se ejecuta
         }else {
-            res.send(`El usuario no es admin`)
+            res.send(`The user must be an admin`)
         }
     }).catch(error => {
-        res.send(`Introduce un id de usuario con rol admin`)
+        res.send(`Introduce an admin user ID`)
     })
 
 };

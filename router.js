@@ -8,16 +8,16 @@ const router = require('express').Router();
 
 //IMPORTAMOS LOS FICHEROS JS (VIEWS) POR CADA TABLA DISEÑADA EN LA BBDD
 //Importo el fichero UsuarioRouter y lo guardo en la variable UsuariosRouter. Luego habrá que crearlo.
-const UsuariosRouter = require('./views/UsuariosRouter');
+const UsersRouter = require('./views/UsersRouter');
 //Importo el fichero PeliculasRouter y lo guardo en la variable PeliculasRouter. Luego habrá que crearlo.
-const PeliculasRouter = require('./views/PeliculasRouter');
+const FilmsRouter = require('./views/FilmsRouter');
 //Importo el fichero PedidosRouter y lo guardo en la variable PedidosRouter. Luego habrá que crearlo.
-const PedidosRouter = require('./views/PedidosRouter');
+const OrdersRouter = require('./views/OrdersRouter');
 
 //Uso el método .use para enlazar cada dirección del endpoint con su correspondiente view (las variables que hemos creado arriba)
-router.use('/usuarios', UsuariosRouter);
-router.use('/peliculas', PeliculasRouter);
-router.use('/pedidos', PedidosRouter);
+router.use('/users', UsersRouter);
+router.use('/films', FilmsRouter);
+router.use('/orders', OrdersRouter);
 
 
 

@@ -1,7 +1,7 @@
 //Importo la clase axios para poder hacer llamadas a otros endpoints
 const axios = require("axios");
 //Importo el modelo Pelicula desestructurado (en formato objeto) para poder escribir en la tabla Pelicula de la BBDD
-const { Pelicula } = require('../models/index')
+const { Film } = require('../models/index')
 //Declaro la API_KEY necesaria para ejecutar endpoints en TMDB
 const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
 //Declaro función para obtener número random entre dos límites
@@ -14,13 +14,13 @@ const minMaxRoundedRandom = (min, max) => {
 
 //Las principales diferencias respecto al método que hemos usado en UsuariosController es que de esta forma hemos de meter los parámetros de entrada (req.query, req.params o req.body) en la declaración del endpoint (en el xxxRouter).
 //La otra diferencia es que en la función controladora, al ser un método, en vez de devolver resultados por res.send, los devolvemos con return.
-class PeliculaClass {
+class FilmClass {
     constructor(){
 
     };
 
     //Clono 500 películas aleatorias de TMDB adaptando los campos a los de mi BBDD
-    clona = async () => {
+    clone = async () => {
         //Variable para añadir a la imagen de TMDB y guardarla en nuestra BBDD
         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
         //Lanzo axios una vez para capturar la cantidad de páginas total que voy a tener que recorrer
@@ -32,49 +32,49 @@ class PeliculaClass {
         //Si quisiéramos clonar TODA TMDB habría que meter el valor en j<valor. Para este proyecto he preferido clonar solo 25 páginas para no demorar mucho la práctica.
         for(let j=1 ; j<=25 ; j++) {
             //Hago la llamada al endpoint de TMDB interpolando la función random donde va el número de página y así no traernos siempre los resultados en el mismo orden
-            let resultados = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
+            let resultss = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
         
             //Variable para saber los resultados por página
-            let numbOfResultsPerPageTMDB = resultados.data.results.length
+            let numbOfResultsPerPageTMDB = resultss.data.results.length
             //Recorro los resultados de la página guardando los campos que me interesan en mi BBDD..
             for(let i=0; i<numbOfResultsPerPageTMDB ; i++) {
-                Pelicula.create({
+                Film.create({
                     //..guardando en cada atributo los datos que llegan por body
-                    title : resultados.data.results[i].original_title,
-                    synopsis : resultados.data.results[i].overview,
-                    adult : resultados.data.results[i].adult,
-                    popularity : resultados.data.results[i].popularity,
-                    image : (TMDBimgUrlRoot + "/" + resultados.data.results[i].poster_path)
+                    title : resultss.data.results[i].original_title,
+                    synopsis : resultss.data.results[i].overview,
+                    adult : resultss.data.results[i].adult,
+                    popularity : resultss.data.results[i].popularity,
+                    image : (TMDBimgUrlRoot + "/" + resultss.data.results[i].poster_path)
                 })
             }
         }
 
-        return (`Se han clonado exitosamente ${25} páginas, con un total de ${500} peliculas`)
+        return (`${25} pages have been clonated satisfactorily, with a total amount of ${500} films`)
     };
 
     //Registro pelicula con los parámetros que llegan por body
-    registra = async (title, synopsis, adult, popularity, image) => {
+    register = async (title, synopsis, adult, popularity, image) => {
         //Hago findAll de la película
         return (
-            Pelicula.findAll({
+            Film.findAll({
             //Donde el atributo title se compara con el title que llega por body
             where : {title : title}
             
                 //Si la promesa se cumple
-            }).then(peliculaRepetida => {
+            }).then(repeatedFilm => {
                 //Si no la encuentra (array vacío)...
-                if(peliculaRepetida == 0) {
+                if(repeatedFilm == 0) {
                     //Crea un elemento nuevo en la tabla Pelicula
-                    return Pelicula.create({
+                    return Film.create({
                         //guardando en cada atributo los datos que llegan por body
                         title : title,
                         synopsis : synopsis,
                         adult : adult,
                         popularity : popularity,
                         image : image
-                    }).then(pelicula => {
+                    }).then(film => {
                         //Y envío un mensaje de confirmación
-                        return (`La pelicula ${pelicula.dataValues.title}, ha sido registrada correctamente`);
+                        return (`The film ${film.dataValues.title}, has been registered satisfactorily`);
                     }).catch((error) => {
                         return (error);
                     });
@@ -83,7 +83,7 @@ class PeliculaClass {
                 //Si la encuentra...
                 }else {
                     //Envío mensaje de que ya existe en la BBDD
-                    return (`La pelicula ${peliculaRepetida[0].title}, ya está registrada en la base de datos`);
+                    return (`The film ${repeatedFilm[0].title}, is already registered in the database`);
                 }
             })
         )
@@ -99,23 +99,23 @@ class PeliculaClass {
     };
 
     //Borro todas las películas de mi BBDD
-    borraTodas = async () => {
+    deleteAll = async () => {
         return ( 
-            Pelicula.destroy({
+            Film.destroy({
             where : {}, //No se especifica ningún elemento ya que queremos borrarlos todos
             truncate : false //Resetea todas las pk
             }).then (elmnt => {
-                return  (`Se han eliminado ${elmnt} peliculas`)
+                return  (`${elmnt} films have been deleted`)
             })    
         )
     };
 
     //Busco y muestro pelicula de TMDB por título usando query
-    APItraePorTitulo = async (titulo) => {
+    APIgetByTitle = async (title) => {
         //Hago la llamada al endpoint de TMDB interpolando la API_KEY y el valor de búsqueda.
-        let resultados = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${titulo}&page=1&include_adult=false`);
+        let results = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${title}&page=1&include_adult=false`);
 
-        return(resultados.data);
+        return(results.data);
 
     };
 
@@ -136,54 +136,53 @@ class PeliculaClass {
     };
 
     //Muestro el número total de películas registradas en nuestra BBDD
-    muestraCantidad = async () => {
+    getAmount = async () => {
         //declaro el string que forma la consulta de SQL
-        let consulta = `SELECT COUNT(*) FROM peliculas;`;
+        let consult = `SELECT COUNT(*) FROM films;`;
 
         //genero el método de sequelize para hacer a consulta SQL en crudo
-        let resultado = await Pelicula.sequelize.query(consulta,{
+        let result = await Film.sequelize.query(consult,{
             //Esta línea es para que no devuelva resultados duplicados
-            type: Pelicula.sequelize.QueryTypes.SELECT});
+            type: Film.sequelize.QueryTypes.SELECT});
 
         //Si obtengo respuesta de la consulta..
-        if(resultado){
+        if(result){
             //..accedo al valor para saber el total de elementos
-            let valor = resultado[0]['COUNT(*)']
-            if(valor > 0) {
-                return (`Hay un total de ${valor} peliculas registradas en la base de datos`);
+            let value = result[0]['COUNT(*)']
+            if(value > 0) {
+                return (`There are ${value} registered films in the database`);
             }else {
-                return(`No hay niguna pelicula registrada en la base de datos`)
+                return(`There are not films registered in the database`)
             };
         };
     };
 
     //Busco y muestro películas de nuestra BBDD con palabra coincidente usando query
-    buscaPorTermino = async (termino) => {
+    searchByTerm = async (arg) => {
 
         //declaro el string que forma la consulta de SQL
-        let consulta = 
-            `SELECT * FROM videoclub.peliculas
-            WHERE title LIKE '%${termino}%'
-            OR synopsis LIKE '%${termino}%'`;
+        let consult = 
+            `SELECT * FROM videoclub.films
+            WHERE title LIKE '%${arg}%'
+            OR synopsis LIKE '%${arg}%'`;
 
         //genero el método de sequelize para hacer a consulta SQL en crudo
-        let resultado = await Pelicula.sequelize.query(consulta,{
+        let result = await Film.sequelize.query(consult,{
             //Esta línea es para que no devuelva resultados duplicados
-            type: Pelicula.sequelize.QueryTypes.SELECT});
+            type: Film.sequelize.QueryTypes.SELECT});
 
         //Si la consulta devuelve algún resultado..
-        if(resultado != 0){
+        if(result != 0){
             //..muestro los resultados obtenidos
-            console.log(resultado)
-           return resultado
+           return result
         }else {
-            return (`El término ${termino} no se encuentra en tu base de datos de películas`)
+            return (`The term ${arg} is not present at films database`)
         }
 
     };
 
     //Busco y muestro película de TMDB por id usando params
-    APItraePorId = async (id) => {
+    APIgetById = async (id) => {
         //Hago llamada al endpoint de TMDB interpolando el id que nos llega por params
         let results = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
 
@@ -199,7 +198,7 @@ class PeliculaClass {
 
 
 
-let PeliculasController = new PeliculaClass();
+let FilmsController = new FilmClass();
 
 //Exporto PeliculasController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
-module.exports = PeliculasController;
+module.exports = FilmsController;

@@ -6,26 +6,26 @@
 	},
 	"item": [
 		{
-			"name": "USUARIOS: Traer todos los usuarios",
+			"name": "USERS: Get all users",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/usuarios",
+					"raw": "http://localhost:3000/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Escribir texto en crudo desde Postman",
+			"name": "USERS: Write raw json from Postman",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -39,27 +39,27 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios",
+					"raw": "http://localhost:3000/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Registrar un usuario",
+			"name": "USERS: User register",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "        {\r\n            \"name\":\"Paco\",\r\n            \"surname\":\"Cojnes\",\r\n            \"age\":32,\r\n            \"email\": \"pacocojnes@gmail.com\",\r\n            \"nickname\":\"pacoj\",\r\n            \"password\":\"1234\",\r\n            \"rol\":\"client\"\r\n        }\r\n        ",
+					"raw": "        {\r\n            \"name\":\"John\",\r\n            \"surname\":\"Frusciante\",\r\n            \"age\":45,\r\n            \"email\": \"jfrusci@gmail.com\",\r\n            \"nickname\":\"jhonfrus\",\r\n            \"password\":\"1234\",\r\n            \"rol\":\"client\"\r\n        }\r\n        ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,7 +74,7 @@
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"register"
 					]
 				}
@@ -82,13 +82,13 @@
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Hacer login usuario",
+			"name": "USERS: User login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"falso@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"email\":\"fake@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,14 +96,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/login",
+					"raw": "http://localhost:3000/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"login"
 					]
 				}
@@ -111,7 +111,7 @@
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Traer perfil buscandolo por email",
+			"name": "USERS: Get profile by email",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -126,23 +126,23 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/usuarios/email/falso@gmail.com",
+					"raw": "http://localhost:3000/usuarios/email/fake@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"email",
-						"falso@gmail.com"
+						"fake@gmail.com"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Traer un usuario por nickname",
+			"name": "USERS: Get user by nickname",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -151,7 +151,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "        {\r\n            \"nombre\":\"Javi\",\r\n            \"apellido1\":\"Monleón\",\r\n            \"apellido2\":\"López\",\r\n            \"edad\":32,\r\n            \"email\": \"falso@gmail.com\",\r\n            \"nickname\":\"jmonloop\",\r\n            \"password\":\"1234\"\r\n        }\r\n        ",
+					"raw": "        {\r\n            \"name\":\"Javi\",\r\n            \"surname1\":\"Monleón\",\r\n            \"surname2\":\"López\",\r\n            \"age\":32,\r\n            \"email\": \"fake@gmail.com\",\r\n            \"nickname\":\"jmonloop\",\r\n            \"password\":\"1234\"\r\n        }\r\n        ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,23 +159,23 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/profile/jotamann",
+					"raw": "http://localhost:3000/usuarios/profile/jmonloop",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"profile",
-						"jotamann"
+						"jmonloop"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Borrar Todos los Usuarios",
+			"name": "USERS: Delete all users",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -189,21 +189,21 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios",
+					"raw": "http://localhost:3000/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios"
+						"users"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Borrar Usuario por ID",
+			"name": "USERS: Delete user by ID",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -230,7 +230,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":\"Luigi\",\r\n    \"apellido1\":\"Minardi\",\r\n    \"apellido2\":\"Siman\",\r\n    \"edad\":19,\r\n    \"email\": \"luigi@hotmail.com\",\r\n    \"nickname\":\"LMS\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Anthony\",\r\n    \"surname1\":\"Kiedis\",\r\n    \"apellido2\":\"Boss\",\r\n    \"edad\":59,\r\n    \"email\": \"akeidis@hotmail.com\",\r\n    \"nickname\":\"akeidis\",\r\n    \"password\":\"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -238,14 +238,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/255",
+					"raw": "http://localhost:3000/users/255",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"255"
 					]
 				}
@@ -253,7 +253,7 @@
 			"response": []
 		},
 		{
-			"name": "USUARIOS: Modificar datos usuario por ID",
+			"name": "USERS: Modify user by ID",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -270,7 +270,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":\"Luigi\",\r\n    \"apellido1\":\"Minardi\",\r\n    \"apellido2\":\"Siman\",\r\n    \"edad\":19,\r\n    \"email\": \"luigi@hotmail.com\",\r\n    \"nickname\":\"LMS\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"nombre\":\"Luigi\",\r\n    \"surname1\":\"Minardi\",\r\n    \"surname2\":\"Siman\",\r\n    \"age\":19,\r\n    \"email\": \"luigi@hotmail.com\",\r\n    \"nickname\":\"LMS\",\r\n    \"password\":\"1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,14 +278,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/profile/",
+					"raw": "http://localhost:3000/users/profile/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"profile",
 						""
 					]
@@ -294,7 +294,7 @@
 			"response": []
 		},
 		{
-			"name": "USUARIOS: cambiar password",
+			"name": "USERS: change password",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -308,14 +308,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/newpassword",
+					"raw": "http://localhost:3000/users/newpassword",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"newpassword"
 					]
 				}
@@ -323,7 +323,7 @@
 			"response": []
 		},
 		{
-			"name": "USUARIOS: buscar en BBDD por termino",
+			"name": "USERS: search in DB by term",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -332,7 +332,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "        {\r\n            \"id\": 256,\r\n            \"peliculaId\": 60599,\r\n            \"usuarioId\": 206,\r\n            \"precio\": 3,\r\n            \"fechaSalida\": \"2022-02-26\",\r\n            \"fechaDevolucion\": \"2022-03-10\"\r\n        }",
+					"raw": "        {\r\n            \"id\": 256,\r\n            \"filmId\": 60599,\r\n            \"userId\": 206,\r\n            \"price\": 3,\r\n            \"outdate\": \"2022-02-26\",\r\n            \"returnDate\": \"2022-03-10\"\r\n        }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -340,14 +340,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/usuarios/custom/15",
+					"raw": "http://localhost:3000/users/custom/15",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"usuarios",
+						"users",
 						"custom",
 						"15"
 					]
@@ -356,19 +356,19 @@
 			"response": []
 		},
 		{
-			"name": "PELICULAS: clonar 500 peliculas de TMDB",
+			"name": "FILMS: clone 500 films from TMDB",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas/toprated",
+					"raw": "http://localhost:3000/films/toprated",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas",
+						"films",
 						"toprated"
 					]
 				}
@@ -376,13 +376,13 @@
 			"response": []
 		},
 		{
-			"name": "PELICULAS: registrar nueva pelicula en BBDD",
+			"name": "FILMS: register new film in DB",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"El silencio de los corderos\",\r\n    \"synopsis\": \"Un tío muy carismático que come personas\",\r\n    \"adult\" : true,\r\n    \"popularity\": 7.3,\r\n    \"image\": \"stringIMAGE\"\r\n}",
+					"raw": "{\r\n    \"title\": \"Jumanji\",\r\n    \"synopsis\": \"Lorem ipsum\",\r\n    \"adult\" : true,\r\n    \"popularity\": 7.3,\r\n    \"image\": \"stringIMAGE\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -390,40 +390,40 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/peliculas",
+					"raw": "http://localhost:3000/films",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas"
+						"films"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PELICULAS: borrar todas las peliculas de la BBDD",
+			"name": "FILMS: delete all films from DB",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas",
+					"raw": "http://localhost:3000/films",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas"
+						"films"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PELICULAS: buscar en TMDB por titulo usando query",
+			"name": "FILMS: search in TMDB by query",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -432,7 +432,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"El silencio de los corderos\",\r\n    \"synopsis\": \"Un tío muy carismático que come personas\",\r\n    \"adult\" : true,\r\n    \"popularity\": 7.3,\r\n    \"image\": \"stringIMAGE\"\r\n}",
+					"raw": "{\r\n    \"title\": \"Jumanji\",\r\n    \"synopsis\": \"Lorem ipsum\",\r\n    \"adult\" : true,\r\n    \"popularity\": 7.3,\r\n    \"image\": \"stringIMAGE\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -440,19 +440,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/peliculas/titulo?criterio=fast",
+					"raw": "http://localhost:3000/peliculas/titulo?arg=fast",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas",
-						"titulo"
+						"films",
+						"title"
 					],
 					"query": [
 						{
-							"key": "criterio",
+							"key": "arg",
 							"value": "fast"
 						}
 					]
@@ -461,19 +461,19 @@
 			"response": []
 		},
 		{
-			"name": "PELICULAS: mostrar TopRated TMDB",
+			"name": "FILMS: get TopRated TMDB",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas/toprated",
+					"raw": "http://localhost:3000/films/toprated",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas",
+						"films",
 						"toprated"
 					]
 				}
@@ -481,44 +481,44 @@
 			"response": []
 		},
 		{
-			"name": "PELICULAS: cantidad total de peliculas en la BBDD",
+			"name": "FILMS: get total of films in DB",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas/cantidad",
+					"raw": "http://localhost:3000/films/amount",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas",
-						"cantidad"
+						"films",
+						"amount"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PELICULAS: buscar termino en mi BBDD",
+			"name": "FILMS: search by term in DB",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas/custom?termino=top",
+					"raw": "http://localhost:3000/peliculas/custom?arg=top",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas",
+						"films",
 						"custom"
 					],
 					"query": [
 						{
-							"key": "termino",
+							"key": "arg",
 							"value": "top"
 						}
 					]
@@ -527,19 +527,19 @@
 			"response": []
 		},
 		{
-			"name": "PELICULAS: traer pelicula TMDB por su id",
+			"name": "FILMS: get TMDB film by its ID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/peliculas/279",
+					"raw": "http://localhost:3000/films/279",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"peliculas",
+						"films",
 						"279"
 					]
 				}
@@ -547,13 +547,13 @@
 			"response": []
 		},
 		{
-			"name": "PEDIDOS: Crear pedido (Admin)",
+			"name": "ORDERS: Crete order (Admin)",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "        {\r\n            \"id\": 256,\r\n            \"peliculaId\": 60599,\r\n            \"usuarioId\": 206,\r\n            \"precio\": 3,\r\n            \"fechaSalida\": \"2022-02-26\",\r\n            \"fechaDevolucion\": \"2022-03-10\"\r\n        }",
+					"raw": "        {\r\n            \"id\": 256,\r\n            \"filmId\": 60599,\r\n            \"userId\": 206,\r\n            \"price\": 3,\r\n            \"outDate\": \"2022-02-26\",\r\n            \"returnDate\": \"2022-03-10\"\r\n        }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -561,21 +561,21 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/pedidos",
+					"raw": "http://localhost:3000/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"pedidos"
+						"orders"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PEDIDOS: Crear pedido por query",
+			"name": "ORDERS: Crete order by query",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -589,23 +589,23 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/pedidos/query?peliculaId=60599&usuarioId=206&precio=4&fechaSalida=2022-03-01&fechaDevolucion=2022-03-15",
+					"raw": "http://localhost:3000/orders/query?filmId=60599&userId=206&price=4&outDate=2022-03-01&returnDate=2022-03-15",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"pedidos",
+						"orders",
 						"query"
 					],
 					"query": [
 						{
-							"key": "peliculaId",
+							"key": "filmId",
 							"value": "60599"
 						},
 						{
-							"key": "usuarioId",
+							"key": "userId",
 							"value": "206"
 						},
 						{
@@ -613,11 +613,11 @@
 							"value": "4"
 						},
 						{
-							"key": "fechaSalida",
+							"key": "outDate",
 							"value": "2022-03-01"
 						},
 						{
-							"key": "fechaDevolucion",
+							"key": "returnDate",
 							"value": "2022-03-15"
 						}
 					]
@@ -626,7 +626,7 @@
 			"response": []
 		},
 		{
-			"name": "PEDIDOS: Informe por usuario",
+			"name": "ORDERS: Report by user",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -643,14 +643,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/pedidos/caria",
+					"raw": "http://localhost:3000/orders/caria",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"pedidos",
+						"orders",
 						"caria"
 					]
 				}
@@ -658,7 +658,7 @@
 			"response": []
 		},
 		{
-			"name": "PEDIDOS: Informe Completo",
+			"name": "ORDERS: Full report",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -675,21 +675,21 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/pedidos",
+					"raw": "http://localhost:3000/orders",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"pedidos"
+						"orders"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "PEDIDOS: Borrar por ID",
+			"name": "ORDERS: Delete by ID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -703,14 +703,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/pedidos/10",
+					"raw": "http://localhost:3000/orders/10",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"pedidos",
+						"orders",
 						"10"
 					]
 				}

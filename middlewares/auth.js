@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
     // Comprueba si el header (metadatos de la página o si lo hacemos por Postman, está en el authorization) tiene el token
     if(!req.headers.authorization) {
         //Si no lo tiene, no dejará ejecutar la función controladora del endpoint (ver en usuarioRouter) y envía un mensaje de que no hay acceso
-        res.status(401).json({ msg: "Acceso no autorizado" });
+        res.status(401).json({ msg: "Denied access" });
     } else {
         // Si lo tiene, Lo extrae
         let token = req.headers.authorization.split(" ")[1];
@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
             //Si la validación es incorrecta...
             if(err) {
                 //...devuelve un error
-                res.status(500).json({ msg: "Ha ocurrido un problema al decodificar el token", err });
+                res.status(500).json({ msg: "There has been an error during token validation", err });
                 //Si la validación es correcta...
             } else {
                 req.user = decoded;

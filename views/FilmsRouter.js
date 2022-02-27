@@ -1,14 +1,14 @@
 //Importo la clase express y la guardo en la variable express (siempre igual)
 const router = require('express').Router();
 //Importo el fichero UsuariosController y lo guardo en la variable UsuariosController. Luego habrá que crearlo.
-const PeliculasController = require('../controllers/PeliculasController');
+const FilmsController = require('../controllers/FilmsController');
 
 //Enlazo método(CRUD), endpoint y función. (Explicación en UsuariosRouter)
 //http://localhost:3000/peliculas
 // Copio 500 películas al azar de TMDB adaptando los campos necesarios para nuestra BBDD
 router.get('/', async(req, res) => {
     try {
-        res.json(await PeliculasController.clona())
+        res.json(await FilmsController.clone())
     } catch(error) {
         return res.status(500).json({
             message: error.message
@@ -31,7 +31,7 @@ router.post('/', async(req, res) => {
         let parArr = [title, synopsis, adult, popularity, image];
 
         //Las meto como parámetros usando spread
-        res.json(await PeliculasController.registra(...parArr))
+        res.json(await FilmsController.register(...parArr))
     } catch(error) {
         return res.status(500).json({
             message: error.message
@@ -43,7 +43,7 @@ router.post('/', async(req, res) => {
 //Borro todas las pelculas de nuestra BBDD
 router.delete('/', async(req, res) => {
     try {
-        res.json(await PeliculasController.borraTodas());
+        res.json(await FilmsController.deleteAll());
     
     } catch(error) {
         return res.status(500).json({
@@ -54,12 +54,12 @@ router.delete('/', async(req, res) => {
 
 //http://localhost:3000/peliculas/titulo?criterio=tituloPelicula
 //Busco y muestro perfiles de peliculas de TMDB por titulo usando query
-router.get('/titulo', async(req, res) => {
+router.get('/title', async(req, res) => {
     try {
         //En la variable busqueda guardamos lo que llega por query, es decir:
         //http://localhost:3000/peliculas/titulo?criterio=TITULO
-        let busqueda = req.query.criterio;
-        res.json(await PeliculasController.APItraePorTitulo(busqueda))
+        let search = req.query.arg;
+        res.json(await FilmsController.APIgetByTitle(search))
 
     } catch(error) {
         return res.status(500).json({
@@ -72,7 +72,7 @@ router.get('/titulo', async(req, res) => {
 //Muestro las películas más votadas de TMDB (5 primeras páginas)
 router.get('/toprated', async(req, res) => {
     try {
-        res.json(await PeliculasController.APItopRated())
+        res.json(await FilmsController.APItopRated())
 
     } catch(error) {
         return res.status(500).json({
@@ -83,9 +83,9 @@ router.get('/toprated', async(req, res) => {
 
 //http://localhost:3000/peliculas/cantidad
 //Muestro el número total de películas que hay registradas en nuestra BBDD
-router.get('/cantidad', async(req, res) => {
+router.get('/amount', async(req, res) => {
     try {
-        res.json(await PeliculasController.muestraCantidad())
+        res.json(await FilmsController.getAmount())
 
     } catch(error) {
         return res.status(500).json({
@@ -99,8 +99,8 @@ router.get('/cantidad', async(req, res) => {
 router.get('/custom', async(req, res) => {
     try {
         //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
-        let termino = req.query.termino
-        res.json(await PeliculasController.buscaPorTermino(termino))
+        let arg = req.query.arg
+        res.json(await FilmsController.searchByTerm(arg))
 
     } catch(error) {
         return res.status(500).json({
@@ -118,7 +118,7 @@ router.get('/:id', async(req, res) => {
     try {
         //lo que metamos al final del endpoint será la id de la película a buscar en TMDB
         let id = req.params.id
-        res.json(await PeliculasController.APItraePorId(id))
+        res.json(await FilmsController.APIgetById(id))
 
     } catch(error) {
         return res.status(500).json({

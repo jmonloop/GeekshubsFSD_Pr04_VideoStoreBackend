@@ -25,7 +25,7 @@ The objective is to create a full backend simulating a Video Rental Store busine
 ### Postman
 1 Download and install [Postman](https://www.postman.com/downloads/)
 
-2 Download the file ../deploy/videoStore.postman_collection.json from this respository
+2 Download the file ../deploy/videoStoreEng.postman_collection.json from this respository
 
 3 Open Postman and click on Import
 ![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_import.jpg)
