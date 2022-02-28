@@ -189,18 +189,7 @@ enviromente variables and "bcrypt" package have been used for this purpose.
     
 
 ## Technologies
-- JavaScript Vanilla
-- Axios
-- Bcrypt
-- Cors
-- Dotenv
-- Jsonwebtoken
-- Nodemon
-- NodeJs
-- Express
-- Sequelize ORM
-- MySQL
-- Postman
+![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/dependencies.png)
 
 
 ## Thanks
