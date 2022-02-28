@@ -37,7 +37,7 @@ class FilmClass {
             }
         }
 
-        return (`${25} pages have been clonated satisfactorily, with a total amount of ${500} films`)
+        return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
     };
     register = async (title, synopsis, adult, popularity, image) => {
         return (
@@ -52,7 +52,7 @@ class FilmClass {
                         popularity : popularity,
                         image : image
                     }).then(film => {
-                        return (`The film ${film.dataValues.title}, has been registered satisfactorily`);
+                        return (`The film ${film.dataValues.title}, has been registered succesfully`);
                     }).catch((error) => {
                         return (error);
                     });

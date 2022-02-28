@@ -74,7 +74,7 @@ UsersController.userRegister = async (req, res) => {
                     password: password,
                     rol: rol
                 }).then(user => {
-                    res.send(`${user.dataValues.name}, you have been registered satisfactorily`);
+                    res.send(`${user.dataValues.name}, you have been registered succesfully`);
 
                 }).catch((error) => {
                     res.send(error);
