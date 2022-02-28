@@ -71,11 +71,13 @@ The database has 3 tables:
 
 2 In the terminal, introduce "npm i" for installing all NODE.JS necessary dependencies.
 
-3 In the terminal, introduce "sequelize db:create" for creating the DB in MySQL.
+3 In the terminal, introduce "sequelize init" for initialize sequelize and generate Models and Migrations.
 
-4 In the terminal, introduce "sequelize db:migrate" for migrating all models.
+4 In the terminal, introduce "sequelize db:create" for creating the DB in MySQL.
 
-3 Then introduce "npm run dev" for running the server and the DB connection.
+5 In the terminal, introduce "sequelize db:migrate" for migrating all models.
+
+6 Then introduce "npm run dev" for running the server and the DB connection.
 
 
 ## How to test the project 
