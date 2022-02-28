@@ -15,6 +15,8 @@ More than seeking to simulate a real business model, what has been sought is try
 
 [List of Endpoints](#list-of-endpoints)
 
+[Technologies](#technologies)
+
 [Thanks](#thanks)
 
 
@@ -185,6 +187,20 @@ enviromente variables and "bcrypt" package have been used for this purpose.
 * DELETE Delete Order by ID using params http://localhost:3000/orders/2
 
     
+
+## Technologies
+- JavaScript Vanilla
+- Axios
+- Bcrypt
+- Cors
+- Dotenv
+- Jsonwebtoken
+- Nodemon
+- NodeJs
+- Express
+- Sequelize ORM
+- MySQL
+- Postman
 
 
 ## Thanks
