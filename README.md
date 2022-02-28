@@ -31,6 +31,16 @@ Therefore two different API restful programming methods have been used:
         xxxController has a FilmsClass instanced as FilmsController.
         FilmsClass has the different methods that execute the logic and results are returned to the endpoint method call.
 
+* DATABASE DESSIGN
+
+The database has 3 tables:
+    - User: User profiles related One-To-Many with Order table
+    - Films: Films profiles related One-To-Many with Order table
+    - Order: Information about which films has each User with the price of the Order and the date when the Film was booked (outDate) and the date when the User has to return the film (returnDate).
+
+![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/relations.jpg)
+
+
 
 ## Installation
 ### MySQL Workbench
