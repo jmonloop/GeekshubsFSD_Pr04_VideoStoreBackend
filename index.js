@@ -7,7 +7,7 @@ const db = require('./db.js');
 const router = require('./router.js');
 
 //Server port number
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 //Options for CORS configuration
 let corsOptions = {

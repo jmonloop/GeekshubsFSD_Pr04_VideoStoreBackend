@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "1234",
-    "database": "videoclub",
-    "host": "127.0.0.1",
+    "username": "b9bac6572d2e62",
+    "password": "ca38acfe",
+    "database": "heroku_fda9e0d2ecf19ba",
+    "host": "eu-cdbr-west-02.cleardb.net",
     "dialect": "mysql"
   },
   "test": {
