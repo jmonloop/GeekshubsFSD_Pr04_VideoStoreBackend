@@ -7,7 +7,7 @@ const db = require('./db.js');
 const router = require('./router.js');
 
 //Server port number
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 7394;
 
 //Options for CORS configuration
 let corsOptions = {
