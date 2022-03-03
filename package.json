@@ -19,7 +19,6 @@
     "jsonwebtoken": "8.5.1",
     "morgan": "1.10.0",
     "mysql2": "2.3.3",
-    "node": "17.4.0",
     "nodemon": "2.0.15",
     "sequelize": "6.16.2",
     "sequelize-cli": "6.4.1",
