@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1a119b49-cb4a-43d7-9ec1-dccff6bd1a01",
+		"_postman_id": "72f23514-062f-441f-99de-904989ec4779",
 		"name": "videoStore Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,12 +11,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/users",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users"
 					]
@@ -39,12 +40,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users"
 					]
@@ -67,14 +69,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/register",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/register",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
-						"users",
 						"register"
 					]
 				}
@@ -96,14 +98,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/login",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/login",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
-						"users",
 						"login"
 					]
 				}
@@ -126,12 +128,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/users/email/fake@gmail.com",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users/email/fake@gmail.com",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"email",
@@ -159,12 +162,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/profile/jmonloop",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users/profile/jmonloop",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"profile",
@@ -189,12 +193,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users"
 					]
@@ -238,12 +243,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/255",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users/255",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"255"
@@ -288,12 +294,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/profile/53",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users/profile/53",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"profile",
@@ -318,12 +325,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/newpassword",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users/newpassword",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"newpassword"
@@ -350,16 +358,17 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/custom/k",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/users/custom/a",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"custom",
-						"k"
+						"a"
 					]
 				}
 			},
@@ -371,12 +380,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films"
 					]
@@ -399,12 +409,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/films",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films"
 					]
@@ -418,12 +429,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films"
 					]
@@ -449,12 +461,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/films/title?arg=title",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films/title?arg=title",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films",
 						"title"
@@ -475,12 +488,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films/toprated",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films/toprated",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films",
 						"toprated"
@@ -495,12 +509,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films/amount",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films/amount",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films",
 						"amount"
@@ -515,12 +530,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films/custom?arg=fight",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films/custom?arg=fight",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films",
 						"custom"
@@ -541,12 +557,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/films/279",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/films/279",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"films",
 						"279"
@@ -570,12 +587,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/orders",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"orders"
 					]
@@ -598,12 +616,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders/query?filmId=369&userId=60&price=2&outDate=2021-08-11&returnDate=2022-03-15",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/orders/query?filmId=369&userId=60&price=2&outDate=2021-08-11&returnDate=2022-03-15",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"orders",
 						"query"
@@ -684,12 +703,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/orders",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"orders"
 					]
@@ -712,12 +732,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/orders/2",
-					"protocol": "http",
+					"raw": "https://videostore-backend.herokuapp.com/orders/2",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"videostore-backend",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"orders",
 						"2"
