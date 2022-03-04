@@ -110,7 +110,7 @@ class FilmClass {
     };
     searchByTerm = async (arg) => {
         let consult = 
-            `SELECT * FROM videoclub.films
+            `SELECT * FROM heroku_1b717c551c287e8.films
             WHERE title LIKE '%${arg}%'
             OR synopsis LIKE '%${arg}%'`;
         let result = await Film.sequelize.query(consult,{

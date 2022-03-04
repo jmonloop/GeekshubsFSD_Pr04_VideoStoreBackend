@@ -222,7 +222,7 @@ UsersController.updatePassword = (req,res) => {
 UsersController.searchByTerm = async (req, res) => {
     let arg = req.params.arg
     let consult = 
-    `SELECT * FROM videoclub.users
+    `SELECT * FROM heroku_1b717c551c287e8.users
     WHERE name LIKE '%${arg}%'
     OR surname LIKE '%${arg}%'
     OR age LIKE '%${arg}%'
