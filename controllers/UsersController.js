@@ -3,8 +3,6 @@ const { User } = require('../models/index');
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
-//Import config.js variables for assign DB name
-const config = require('./config/config.js');
 const jwt = require('jsonwebtoken');
 
 //UserController object declaration
@@ -224,7 +222,7 @@ UsersController.updatePassword = (req,res) => {
 UsersController.searchByTerm = async (req, res) => {
     let arg = req.params.arg
     let consult = 
-    `SELECT * FROM ${config.development.database}.users
+    `SELECT * FROM users
     WHERE name LIKE '%${arg}%'
     OR surname LIKE '%${arg}%'
     OR age LIKE '%${arg}%'

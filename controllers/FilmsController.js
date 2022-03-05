@@ -4,9 +4,6 @@ const axios = require("axios");
 //Film model detructured import
 const { Film } = require('../models/index')
 
-//Import config.js variables for assign DB name
-const config = require('./config/config.js');
-
 //API_KEY necessary for TMDB endpoints
 const API_KEY = "210d6a5dd3f16419ce349c9f1b200d6d";
 
@@ -113,7 +110,7 @@ class FilmClass {
     };
     searchByTerm = async (arg) => {
         let consult = 
-            `SELECT * FROM ${config.development.database}.films
+            `SELECT * FROM films
             WHERE title LIKE '%${arg}%'
             OR synopsis LIKE '%${arg}%'`;
         let result = await Film.sequelize.query(consult,{
