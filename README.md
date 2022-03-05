@@ -4,7 +4,7 @@ This is my fourth project of GeeksHubs Academy FSD bootcamp.
 The objective is to create an API restful backend simulating a Video Rental Store business model.
 
 
-More than seeking to simulate a real business model, what has been sought is trying to test the largest possible type of requests for thus practice and also have a guide template for future projects.
+More than seeking to simulate a real business model, what has been sought is trying to test the largest possible type of requests for thus practice and also have a template guide for future projects.
 
 
 [Architecture](#architecture)
@@ -33,7 +33,7 @@ Therefore two different API restful programming methods have been used:
         xxxController has a FilmsClass instanced as FilmsController.
         FilmsClass has the different methods that execute the logic and results are returned to the endpoint method call.
 
-* DATABASE DESSIGN
+* DATABASE DESIGN
 
 The database has 3 tables:
     - User: User profiles related One-To-Many with Order table
@@ -45,12 +45,7 @@ The database has 3 tables:
 
 
 ## Installation
-### MySQL Workbench
-1 Download and install [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-
-2 Assing your username and password
-
-3 Open the LocalInstance
+The project is fully deployed in Heroku server so you only need to download Postman application for testing it.
 
 ### Postman
 1 Download and install [Postman](https://www.postman.com/downloads/)
@@ -65,21 +60,6 @@ The database has 3 tables:
 5 Expand the new videoStore tab and all the endpoints will be shown
 
 ![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_collection.jpg)
-
-### Visual Studio Code config
-1 In ../config/config.json change "username" and "password" according to the ones you selected for your MySQL project in the "development" object.
-
-![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/vsc_config.jpg)
-
-2 In the terminal, introduce "npm i" for installing all NODE.JS necessary dependencies.
-
-3 In the terminal, introduce "sequelize init" for initialize sequelize and generate Models and Migrations.
-
-4 In the terminal, introduce "sequelize db:create" for creating the DB in MySQL.
-
-5 In the terminal, introduce "sequelize db:migrate" for migrating all models.
-
-6 Then introduce "npm run dev" for running the server and the DB connection.
 
 
 ## How to test the project 
@@ -132,9 +112,8 @@ To execute this type of requests you need to:
 * As sequelize ORM is installed, seeders with dummy data can be added to the project's database.
 
 For adding the seeders:
-
     1. In terminal, introduce "sequelize db:seed:all" for adding seeders to Film and User tables.
-        If want to add seeders just to one model type:
+        If you want to add seeders only to one model type:
             sequelize db:seed ../seeders/<<name of the seeder's model file>>
 
 
@@ -146,44 +125,44 @@ enviromente variables and "bcrypt" package have been used for this purpose.
 ## List of Endpoints
 
 ### USERS
-* GET Get all users http://localhost:3000/users
-* POST Write raw json text and print it by Postman http://localhost:3000/users
-* POST Register new user http://localhost:3000/users/register
-* POST User login http://localhost:3000/users/login
-* GET Get user profile by email using params http://localhost:3000/users/email/:email (auth required)
-* GET Get user profile by nickname using params http://localhost:3000/users/profile/:nickname (auth required)
-* DELETE Delete all users http://localhost:3000/users (admin required)
-* DELETE Delete user by ID using params http://localhost:3000/users/:id (auth required)
-* PUT Modify user profile by ID using params http://localhost:3000/users/profile/:id (auth required)
-* PUT Change user password http://localhost:3000/users/newpassword (auth required)
-* GET Search user profile by text using params http://localhost:3000/users/custom/:term
+* GET Get all users https://videostore-backend.herokuapp.com/users
+* POST Write raw json text and print it by Postman https://videostore-backend.herokuapp.com/users
+* POST Register new user https://videostore-backend.herokuapp.com/users/register
+* POST User login https://videostore-backend.herokuapp.com/users/login
+* GET Get user profile by email using params https://videostore-backend.herokuapp.com/users/email/:email (auth required)
+* GET Get user profile by nickname using params https://videostore-backend.herokuapp.com/users/profile/:nickname (auth required)
+* DELETE Delete all users https://videostore-backend.herokuapp.com/users (admin required)
+* DELETE Delete user by ID using params https://videostore-backend.herokuapp.com/users/:id (auth required)
+* PUT Modify user profile by ID using params https://videostore-backend.herokuapp.com/users/profile/:id (auth required)
+* PUT Change user password https://videostore-backend.herokuapp.com/users/newpassword (auth required)
+* GET Search user profile by text using params https://videostore-backend.herokuapp.com/users/custom/:term
 
     Show results in which there are coincidences with any field except "password" ones.
 
 ### FILMS
-* GET Clone 500 random films from TMDB http://localhost:3000/films
-* POST Register new film http://localhost:3000/films
-* DELETE Delete all films http://localhost:3000/films
-* GET Search in TMDB by title using query http://localhost:3000/films/title?arg=title
-* GET Get first 5 pages of top rated films from TMDB http://localhost:3000/films/toprated
-* GET Get total amount of registered films http://localhost:3000/films/amount
-* GET Search film by term using query http://localhost:3000/films/custom?arg=term
+* GET Clone 500 random films from TMDB https://videostore-backend.herokuapp.com/films
+* POST Register new film https://videostore-backend.herokuapp.com/films
+* DELETE Delete all films https://videostore-backend.herokuapp.com/films
+* GET Search in TMDB by title using query https://videostore-backend.herokuapp.com/films/title?arg=title
+* GET Get first 5 pages of top rated films from TMDB https://videostore-backend.herokuapp.com/films/toprated
+* GET Get total amount of registered films https://videostore-backend.herokuapp.com/films/amount
+* GET Search film by term using query https://videostore-backend.herokuapp.com/films/custom?arg=term
 
     Show results in which there are coincidences with "title" or "synopsis" field
-* GET Get TMDB film by ID using params http://localhost:3000/films/:id
+* GET Get TMDB film by ID using params https://videostore-backend.herokuapp.com/films/:id
 
 ### ORDERS
-* POST Create order http://localhost:3000/orders (admin required)
-* POST Create order using query http://localhost:3000/orders/query?filmId=369&userId=60&price=2&outDate=2021-08-11&returnDate=2022-03-15
+* POST Create order https://videostore-backend.herokuapp.com/orders (admin required)
+* POST Create order using query https://videostore-backend.herokuapp.com/orders/query?filmId=369&userId=60&price=2&outDate=2021-08-11&returnDate=2022-03-15
 
     Same that first one but inputting fields by URL query arguments
-* GET Report by user name using params http://localhost:3000/orders/:name
+* GET Report by user name using params https://videostore-backend.herokuapp.com/orders/:name
 
     Create a report with all orders owned by a user relating other user and film fields.
-* GET Full report http://localhost:3000/orders
+* GET Full report https://videostore-backend.herokuapp.com/orders
 
     Create a full report of all orders relating user, orders and film fields and sort them by outDate descendent.
-* DELETE Delete Order by ID using params http://localhost:3000/orders/2
+* DELETE Delete Order by ID using params https://videostore-backend.herokuapp.com/orders/2
 
     
 
