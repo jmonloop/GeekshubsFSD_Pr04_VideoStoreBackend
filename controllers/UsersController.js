@@ -108,7 +108,7 @@ UsersController.login = (req, res) => {
                     token: token
                 })
             } else {
-                res.status(401).json({ msg: "Invalid email or password" });
+                res.send("Invalid email or password" );
             }
         };
     }).catch(error => {
