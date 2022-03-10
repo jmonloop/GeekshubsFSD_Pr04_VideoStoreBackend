@@ -1,5 +1,6 @@
 //Imports
 const axios = require("axios");
+const res = require("express/lib/response");
 
 //Film model detructured import
 const { Film } = require('../models/index')
@@ -39,6 +40,12 @@ class FilmClass {
 
         return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
     };
+    getAll = async () => {
+        Film.findAll()
+        .then(data =>{
+            return(data)
+        })
+    }
     register = async (title, synopsis, adult, popularity, image) => {
         return (
             Film.findAll({
