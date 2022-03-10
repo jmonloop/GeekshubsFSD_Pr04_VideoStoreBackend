@@ -41,8 +41,9 @@ class FilmClass {
         return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
     };
     getAll = async () => {
-        Film.findAll()
+        Film.findAll({})
         .then(data =>{
+            console.log(data)
             return(data)
         })
     }
@@ -100,6 +101,7 @@ class FilmClass {
             let results = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${i}`);
             ratedArr.push(results.data)
         }
+        console.log(ratedArr)
         return (ratedArr);
     };
     getAmount = async () => {
