@@ -101,7 +101,7 @@ UsersController.login = (req, res) => {
                 let token = jwt.sign({ user: elmnt }, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
-                let loginOKmessage = `Welcome again ${elmnt.dataValues.name}`
+                let loginOKmessage = `Welcome again ${elmnt.dataValues.nickame}`
                 res.json({
                     loginOKmessage,
                     user: elmnt,
