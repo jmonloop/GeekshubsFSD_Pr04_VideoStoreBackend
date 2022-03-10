@@ -12,15 +12,6 @@ router.get('/', async(req, res) => {
         })
     }
 });
-router.get('/all', async(req, res) => {
-    try {
-        res.json(await FilmsController.getAll())
-    } catch(error) {
-        return res.status(500).json({
-            message: error.message
-        })
-    }
-});
 router.post('/', async(req, res) => {
     try {
         let title = req.body.title;

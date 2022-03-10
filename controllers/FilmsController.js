@@ -40,13 +40,6 @@ class FilmClass {
 
         return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
     };
-    getAll = async () => {
-        Film.findAll({})
-        .then(data =>{
-            console.log(data)
-            return(data)
-        })
-    }
     register = async (title, synopsis, adult, popularity, image) => {
         return (
             Film.findAll({
