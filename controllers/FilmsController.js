@@ -40,14 +40,14 @@ class FilmClass {
 
         return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
     };
-    register = async (tmdbId, title, synopsis, adult, popularity, image) => {
+    register = async (id, title, synopsis, adult, popularity, image) => {
         return (
             Film.findAll({
-            where : {tmdbId : tmdbId}
+            where : {id : id}
             }).then(repeatedFilm => {
                 if(repeatedFilm == 0) {
                     return Film.create({
-                        tmdbId : tmdbId,
+                        id : id,
                         title : title,
                         synopsis : synopsis,
                         adult : adult,
