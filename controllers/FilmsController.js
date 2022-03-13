@@ -43,10 +43,11 @@ class FilmClass {
     register = async (title, synopsis, adult, popularity, image) => {
         return (
             Film.findAll({
-            where : {title : title}
+            where : {id : id}
             }).then(repeatedFilm => {
                 if(repeatedFilm == 0) {
                     return Film.create({
+                        id : id,
                         title : title,
                         synopsis : synopsis,
                         adult : adult,
