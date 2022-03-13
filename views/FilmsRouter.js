@@ -14,7 +14,7 @@ router.get('/', async(req, res) => {
 });
 router.post('/', async(req, res) => {
     try {
-        let id = req.body.id;
+        let tmdbId = req.body.tmdbIid;
         let title = req.body.title;
         let synopsis = req.body.synopsis;
         let adult = req.body.adult;
