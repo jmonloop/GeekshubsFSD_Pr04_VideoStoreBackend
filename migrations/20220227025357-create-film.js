@@ -4,11 +4,8 @@ module.exports = {
     await queryInterface.createTable('Films', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      tmdbId:{
         type: Sequelize.INTEGER
       },
       title: {
