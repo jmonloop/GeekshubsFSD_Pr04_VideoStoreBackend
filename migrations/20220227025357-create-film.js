@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      tmdbId:{
-        type: Sequelize.INTEGER
-      },
+      // tmdbId:{
+      //   type: Sequelize.INTEGER
+      // },
       title: {
         type: Sequelize.STRING
       },
