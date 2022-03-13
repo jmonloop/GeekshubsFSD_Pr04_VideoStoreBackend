@@ -75,7 +75,7 @@ OrdersController.reportByUserId = async (req,res) => {
     FROM users 
     INNER JOIN orders ON users.id = orders.userId
     INNER JOIN films ON films.id = orders.filmId 
-    WHERE id LIKE '%${id}%';`;
+    WHERE id LIKE ${id};`;
     let result = await Order.sequelize.query(consult,{
         type: Order.sequelize.QueryTypes.SELECT});
 
