@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Films', {
-      id: {
+      tmdbId: {
         allowNull: false,
         // autoIncrement: true,
         primaryKey: true,

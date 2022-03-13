@@ -14,13 +14,13 @@ router.get('/', async(req, res) => {
 });
 router.post('/', async(req, res) => {
     try {
-        let id = req.body.id;
+        let tmdbId = req.body.tmdbId;
         let title = req.body.title;
         let synopsis = req.body.synopsis;
         let adult = req.body.adult;
         let popularity = req.body.popularity;
         let image = req.body.image;
-        let parArr = [id, title, synopsis, adult, popularity, image];
+        let parArr = [tmdbId, title, synopsis, adult, popularity, image];
         res.json(await FilmsController.register(...parArr))
     } catch(error) {
         return res.status(500).json({
