@@ -47,7 +47,7 @@ class FilmClass {
             }).then(repeatedFilm => {
                 if(repeatedFilm == 0) {
                     return Film.create({
-                        // tmdbId : tmdbId,
+                        tmdbId : tmdbId,
                         title : title,
                         synopsis : synopsis,
                         adult : adult,
