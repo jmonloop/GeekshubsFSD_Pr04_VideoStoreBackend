@@ -68,14 +68,14 @@ OrdersController.createByQuery = (req,res) => {
         res.send(error)
     }))
 }
-OrdersController.reportByUser = async (req,res) => {
-    let user = req.params.user
+OrdersController.reportByUserId = async (req,res) => {
+    let id = req.params.id
     let consult = 
     `SELECT orders.id AS orderNumber, orders.price AS price, users.name AS userName, users.email AS userEmail, films.title AS filmTitle, orders.outDate AS outDate
     FROM users 
     INNER JOIN orders ON users.id = orders.userId
     INNER JOIN films ON films.id = orders.filmId 
-    WHERE name LIKE '%${user}%';`;
+    WHERE id LIKE '%${id}%';`;
     let result = await Order.sequelize.query(consult,{
         type: Order.sequelize.QueryTypes.SELECT});
 
