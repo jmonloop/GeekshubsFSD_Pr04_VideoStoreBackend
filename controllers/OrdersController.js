@@ -69,8 +69,8 @@ OrdersController.createByQuery = (req, res) => {
         }))
 }
 OrdersController.findUserMovies = (req, res) => {
-    let userId = req.body.userId;
-    let filmId = req.body.filmId;
+    let userId = req.query.user;
+    let filmId = req.query.film;
 
     Order.findOne({
         where: {
