@@ -68,13 +68,13 @@ OrdersController.createByQuery = (req, res) => {
             res.send(error)
         }))
 }
-OrdersController.findUserMovies = (req, res) => {
+OrdersController.findUserMovies = async (req, res) => {
     let userId = req.query.user;
     let filmId = req.query.film;
 
     let consult = `SELECT * FROM orders
         WHERE (filmId = ${filmId} AND userId = ${userId})`;
-        
+
     let result = await Order.sequelize.query(consult, {
         type: Order.sequelize.QueryTypes.SELECT
     });
