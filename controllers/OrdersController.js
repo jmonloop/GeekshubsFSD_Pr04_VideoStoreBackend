@@ -72,7 +72,7 @@ OrdersController.findUserMovies = (req, res) => {
     let userId = req.query.user;
     let filmId = req.query.film;
 
-    Order.findOne({
+    Order.findAll({
         where: {
             [Op.and]: [
                 {
