@@ -72,7 +72,7 @@ OrdersController.findUserMovies = (req, res) => {
     let userId = req.query.user;
     let filmId = req.query.film;
 
-    Order.findAll({
+    Order.findOne({
         where: {
             [Op.and]: [
                 {
@@ -97,7 +97,7 @@ OrdersController.findUserMovies = (req, res) => {
         };
 
     }).catch(error => {
-        res.send(error);
+        res.send('que te follen');
     })
 }
 OrdersController.reportByUserId = async (req, res) => {
