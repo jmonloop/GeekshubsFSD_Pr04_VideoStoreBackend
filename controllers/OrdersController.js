@@ -72,33 +72,16 @@ OrdersController.findUserMovies = (req, res) => {
     let userId = req.query.user;
     let filmId = req.query.film;
 
-    Order.findOne({
-        where: {
-            [Op.and]: [
-                {
-                    userId: {
-                        [Op.like]: userId
-                    }
-                },
-                {
-                    filmId: {
-                        [Op.like]: filmId
-                    }
-                }
-            ]
-        }
+    let consult = `SELECT * FROM orders
+        WHERE (filmId = ${filmId} AND userId = ${userId})`;
+        
+    let result = await Order.sequelize.query(consult, {
+        type: Order.sequelize.QueryTypes.SELECT
+    });
 
-    }).then(elmnt => {
-        if (!elmnt) {
-            res.send("This user doesn't have this movie yet");
-        } else {
-
-            res.send("The user already has this movie");
-        };
-
-    }).catch(error => {
-        res.send('que te follen');
-    })
+    if (result) {
+        res.send(result);
+    }
 }
 OrdersController.reportByUserId = async (req, res) => {
     let id = req.params.id
