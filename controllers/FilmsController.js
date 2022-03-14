@@ -40,7 +40,7 @@ class FilmClass {
 
         return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
     };
-    register = async (id, title, synopsis, adult, popularity, image) => {
+    register = async (id, title) => {
         return (
             Film.findAll({
             where : {id : id}
@@ -48,11 +48,7 @@ class FilmClass {
                 if(repeatedFilm == 0) {
                     return Film.create({
                         id : id,
-                        title : title,
-                        synopsis : synopsis,
-                        adult : adult,
-                        popularity : popularity,
-                        image : image
+                        title : title
                     }).then(film => {
                         return (`The film ${film.dataValues.title}, has been registered succesfully`);
                     }).catch((error) => {
