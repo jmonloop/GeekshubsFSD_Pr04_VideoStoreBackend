@@ -5,7 +5,7 @@ const { Order } = require('../models/index');
 const OrdersController = {};
 
 //Controller Functions
-OrdersController.createByBody = (req,res) => {
+OrdersController.createByBody = (req, res) => {
     let body = req.body;
     Order.create({
         filmId: body.filmId,
@@ -25,22 +25,22 @@ OrdersController.createByBody = (req,res) => {
         // }
 
     })
-    .then(order => {
-        if(order){
-            let message = "A new order has been created with this attributes:"
-            res.json({
-                message,
-                order
-            })
-        }else{
-            res.send("Creation of new order has been failed");
-        }
-    })
-    .catch((error => {
-        res.send(error)
-    }))
+        .then(order => {
+            if (order) {
+                let message = "A new order has been created with this attributes:"
+                res.json({
+                    message,
+                    order
+                })
+            } else {
+                res.send("Creation of new order has been failed");
+            }
+        })
+        .catch((error => {
+            res.send(error)
+        }))
 }
-OrdersController.createByQuery = (req,res) => {
+OrdersController.createByQuery = (req, res) => {
     let filmId = req.query.filmId;
     let userId = req.query.userId;
     let price = req.query.price;
@@ -53,52 +53,86 @@ OrdersController.createByQuery = (req,res) => {
         outDate: outDate,
         returnDate: returnDate
     })
-    .then(order => {
-        if(order){
-            let message = "A new order has been created with this attributes:"
-            res.json({
-                message,
-                order
-            })
-        }else{
-            res.send("Creation of new order has been failed");
-        }
-    })
-    .catch((error => {
-        res.send(error)
-    }))
+        .then(order => {
+            if (order) {
+                let message = "A new order has been created with this attributes:"
+                res.json({
+                    message,
+                    order
+                })
+            } else {
+                res.send("Creation of new order has been failed");
+            }
+        })
+        .catch((error => {
+            res.send(error)
+        }))
 }
-OrdersController.reportByUserId = async (req,res) => {
+OrdersController.findUserMovies = (req, res) => {
+    let userId = req.body.userId;
+    let filmId = req.body.filmId;
+
+    Order.findOne({
+        where: {
+            [Op.and]: [
+                {
+                    userId: {
+                        [Op.like]: userId
+                    }
+                },
+                {
+                    filmId: {
+                        [Op.like]: filmId
+                    }
+                }
+            ]
+        }
+
+    }).then(elmnt => {
+        if (!elmnt) {
+            res.send("This user doesn't have this movie yet");
+        } else {
+
+            res.send("The user already has this movie");
+        };
+
+    }).catch(error => {
+        res.send(error);
+    })
+}
+OrdersController.reportByUserId = async (req, res) => {
     let id = req.params.id
-    let consult = 
-    `SELECT orders.id AS orderNumber, orders.price AS price, users.name AS userName, users.email AS userEmail, films.title AS filmTitle, orders.outDate AS outDate
+    let consult =
+        `SELECT orders.id AS orderNumber, orders.price AS price, users.name AS userName, users.email AS userEmail, films.title AS filmTitle, orders.outDate AS outDate
     FROM users 
     INNER JOIN orders ON users.id = orders.userId
     INNER JOIN films ON films.id = orders.filmId 
     WHERE userId LIKE ${id};`;
-    let result = await Order.sequelize.query(consult,{
-        type: Order.sequelize.QueryTypes.SELECT});
+    let result = await Order.sequelize.query(consult, {
+        type: Order.sequelize.QueryTypes.SELECT
+    });
 
-  
-        if(result != 0){
-            res.send(result);
-        } else {
-            res.send('There are no fields with the searched term')
-        }
+
+    if (result != 0) {
+        res.send(result);
+    } else {
+        res.send('There are no fields with the searched term')
+    }
 
 
 }
-OrdersController.fullReport = async (req,res) => {
-    let consult = 
-    `SELECT orders.id AS orderNumber, orders.price AS price, users.name AS userName, users.email AS userEmail, films.title AS filmTitle, orders.outDate AS outDate
+OrdersController.fullReport = async (req, res) => {
+    let consult =
+        `SELECT orders.id AS orderNumber, orders.price AS price, users.name AS userName, users.email AS userEmail, films.title AS filmTitle, orders.outDate AS outDate
     FROM users 
     INNER JOIN orders ON users.id = orders.userId
     INNER JOIN films ON films.id = orders.filmId 
     ORDER BY outDate ASC`;
-    let result = await Order.sequelize.query(consult,{
-        type: Order.sequelize.QueryTypes.SELECT});
+    let result = await Order.sequelize.query(consult, {
+        type: Order.sequelize.QueryTypes.SELECT
+    });
 
-    if(result){
+    if (result) {
         res.send(result);
     }
 
@@ -107,13 +141,13 @@ OrdersController.deleteById = async (req, res) => {
     let id = req.params.id
     try {
         Order.findOne({
-            where : {id : id}
+            where: { id: id }
         }).then(elmnt => {
-            if(elmnt != null) {
+            if (elmnt != null) {
                 let deletedOrder = elmnt
                 Order.destroy({
-                    where : { id : id },
-                    truncate : false
+                    where: { id: id },
+                    truncate: false
                 }).then(x => {
                     res.send(`Order number ${deletedOrder.dataValues.id} has been deleted`)
                 })

@@ -8,6 +8,7 @@ const isAdmin = require('../middlewares/isAdmin');
 router.post('/', OrdersController.createByBody);
 router.post('/query', OrdersController.createByQuery);
 router.get('/', OrdersController.fullReport);
+router.get('/user', OrdersController.findUserMovies);
 router.get('/:id', OrdersController.reportByUserId);
 router.delete('/:id', OrdersController.deleteById);
 
