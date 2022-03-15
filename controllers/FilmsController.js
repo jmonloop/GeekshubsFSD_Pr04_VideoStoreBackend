@@ -44,7 +44,7 @@ class FilmClass {
         return (
             Film.findAll()
                 .then(results => {
-                    res.send(results)
+                    return(results)
                 })
         )
     }
