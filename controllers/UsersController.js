@@ -179,7 +179,7 @@ UsersController.modifyUser = async (req, res) => {
             where : {id : id}
         })
         .then(elmnt => {
-            res.send(`The user profile with the id number ${id} has been modified`)
+            res.send(elmnt)
         })
     } catch (error) {
         res.send(error);

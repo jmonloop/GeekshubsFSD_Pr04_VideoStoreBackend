@@ -40,6 +40,19 @@ OrdersController.createByBody = (req, res) => {
             res.send(error)
         }))
 }
+OrdersController.modifyByBody = (req, res) => {
+    let id = req.params.id;
+    try {
+        Order.update(req.body, {
+            where : {id : id}
+        })
+        .then(elmnt => {
+            res.send(elmnt)
+        })
+    } catch (error) {
+        res.send(error);
+    }
+}
 OrdersController.createByQuery = (req, res) => {
     let filmId = req.query.filmId;
     let userId = req.query.userId;

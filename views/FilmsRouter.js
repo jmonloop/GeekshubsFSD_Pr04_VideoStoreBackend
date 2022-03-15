@@ -5,7 +5,8 @@ const FilmsController = require('../controllers/FilmsController');
 //Endpoint-FilmController methods links
 router.get('/', async(req, res) => {
     try {
-        res.json(await FilmsController.clone())
+        res.json(await FilmsController.getAll())
+        // res.json(await FilmsController.clone())
     } catch(error) {
         return res.status(500).json({
             message: error.message

@@ -6,6 +6,7 @@ const isAdmin = require('../middlewares/isAdmin');
 
 ////Enpoint-function links
 router.post('/', OrdersController.createByBody);
+router.put('/:id', OrdersController.modifyByBody);
 router.post('/query', OrdersController.createByQuery);
 router.get('/', OrdersController.fullReport);
 router.get('/user', OrdersController.findUserMovies);
