@@ -42,7 +42,7 @@ class FilmClass {
     // };
     getAll = async () => {
         return (
-            Film.findAll({})
+            Film.findAll()
                 .then(results => {
                     res.send(results)
                 })
