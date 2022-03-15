@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 //Options for CORS configuration
 let corsOptions = {
     origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS",
     preflightContinue: false,
     optionsSuccessStatus: 204
 };
