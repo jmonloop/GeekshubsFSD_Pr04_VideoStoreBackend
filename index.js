@@ -13,8 +13,8 @@ const PORT = process.env.PORT || 5000;
 let corsOptions = {
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    preflightContinue: true,
-    // preflightContinue: false,
+    preflightContinue: false,
+    allowedHeaders: '*',
     optionsSuccessStatus: 204
 };
 
