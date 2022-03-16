@@ -4,12 +4,13 @@ const router = express.Router();
 const auth = require("../middlewares/auth");
 const isAdmin = require("../middlewares/isAdmin");
 const UsersController = require('../controllers/UsersController');
+const { header } = require('express/lib/request');
 
 //Enpoint-function links
 router.get('/', UsersController.getUsers);
 router.post('/', UsersController.writeRaw);
 router.post('/register', UsersController.userRegister);
-router.post('/login', headers, UsersController.login);
+router.post('/login', Headers, UsersController.login);
 router.get('/email/:email', auth, UsersController.getUserByEmail);
 router.get('/profile/:nickname', auth, UsersController.getUserByNickname);
 router.delete('/', isAdmin, UsersController.deleteAll);
