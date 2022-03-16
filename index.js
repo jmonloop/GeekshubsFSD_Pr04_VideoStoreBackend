@@ -22,6 +22,13 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(router);
 
+app.use(
+    cors({
+        origin: "http://localhost:3000", 
+        credentials: true,
+    })
+);
+
 //Run server and database
 db.then(()=>{
     app.listen(PORT, ()=> console.log(`Server on port ${PORT}`));
