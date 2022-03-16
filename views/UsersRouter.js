@@ -9,7 +9,7 @@ const UsersController = require('../controllers/UsersController');
 router.get('/', UsersController.getUsers);
 router.post('/', UsersController.writeRaw);
 router.post('/register', UsersController.userRegister);
-router.post('/login', UsersController.login);
+router.post('/login', headers, UsersController.login);
 router.get('/email/:email', auth, UsersController.getUserByEmail);
 router.get('/profile/:nickname', auth, UsersController.getUserByNickname);
 router.delete('/', isAdmin, UsersController.deleteAll);
