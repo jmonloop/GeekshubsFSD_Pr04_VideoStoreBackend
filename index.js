@@ -14,13 +14,13 @@ let corsOptions = {
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
+    allowedHeaders: ["XMLHttpRequest"],
     optionsSuccessStatus: 204
 };
 
 //Middlewares
 app.use(express.json());
-app.use(cors());
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(router);
 
 
