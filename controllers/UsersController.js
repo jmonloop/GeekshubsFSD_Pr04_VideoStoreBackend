@@ -113,6 +113,7 @@ UsersController.login = (req, res) => {
         };
     }).catch(error => {
         res.send(error);
+        
     })
 };
 UsersController.getUserByEmail = (req, res) => {
