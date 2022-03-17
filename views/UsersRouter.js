@@ -16,7 +16,7 @@ router.get('/email/:email', auth, UsersController.getUserByEmail);
 router.get('/profile/:nickname', auth, UsersController.getUserByNickname);
 router.delete('/', isAdmin, UsersController.deleteAll);
 router.delete('/:id', auth, UsersController.deleteById);
-router.put('/profile/:id', auth, UsersController.modifyUser);
+router.put('/profile', auth, UsersController.modifyUser);
 router.put('/newpassword', auth, UsersController.updatePassword);
 router.get('/custom/:arg', UsersController.searchByTerm)
 
