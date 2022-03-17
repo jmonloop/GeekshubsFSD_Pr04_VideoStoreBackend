@@ -180,7 +180,12 @@ UsersController.modifyUser = async (req, res) => {
             where : {id : id}
         })
         .then(elmnt => {
-            res.send(elmnt)
+            User.findOne({
+                where: { id: id }
+            })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
         })
     } catch (error) {
         res.send(error);
