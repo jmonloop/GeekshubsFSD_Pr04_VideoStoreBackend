@@ -19,6 +19,7 @@ router.delete('/:id', auth, UsersController.deleteById);
 router.put('/profile/:id', auth, UsersController.modifyUser);
 router.put('/newpassword', auth, UsersController.updatePassword);
 router.get('/custom/:arg', UsersController.searchByTerm)
+router.get('/getbyid/:id', UsersController.getById)
 
 //Export
 module.exports = router;

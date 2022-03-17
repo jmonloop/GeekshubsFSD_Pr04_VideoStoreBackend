@@ -243,6 +243,17 @@ UsersController.searchByTerm = async (req, res) => {
         res.send(`The term ${arg} is not present at your users database`)
     }
 };
+UsersController.getById = (req, res) => {
+    let id = req.params.id
+    User.findOne({ where : { id : id}})
+    .then(data => {
+        if(data != null) {
+            res.send(data)
+        } else {
+            res.send(`${id} not found in the database. Add a valid email direction to the URL for getting its user profile`)
+        }
+    });
+}
 
 //Export
 module.exports = UsersController;
