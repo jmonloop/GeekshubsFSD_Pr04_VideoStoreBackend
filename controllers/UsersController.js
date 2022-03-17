@@ -174,7 +174,7 @@ UsersController.deleteById = async (req, res) => {
     };
 };
 UsersController.modifyUser = async (req, res) => {
-    let id = req.body.id;
+    let id = req.params.id;
     try {
         User.update(req.body, {
             where : {id : id}
