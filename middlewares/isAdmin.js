@@ -3,17 +3,21 @@ const { User } = require('../models/index');
 
 //Export logic
 module.exports = (req, res, next) => {
-    let id = req.body.id;
-    User.findOne({
-        where : { id : id }
-    }).then(foundUser => {
-        if(foundUser.rol == "admin"){
+    // pick the token
+    let token = req.headers.authorization.split(' ')[1];
+    // pick the user logged
+    let {user} = jwt.decode(token, authConfig.secret)
+    try {
+        if (user.rol == "admin") {
             next();
-        }else {
-            res.send(`The user must be an admin`)
+        } else {
+            res.status(403).send({ msg: `User is not allowed.` });
         }
-    }).catch(error => {
-        res.send(`Introduce an admin user ID`)
-    })
+    } catch (error) {
+        res.status(400).json({
+            msg: `Something bad happened, try to check the infos you put and try again.`,
+            error: error
+        });
+    }
 
 };
