@@ -87,7 +87,7 @@ class FilmClass {
                         where: { id: id }
                     })
                         .then(elmnt => {
-                            res.send(elmnt)
+                            return(elmnt)
                         })
                 })
         )
