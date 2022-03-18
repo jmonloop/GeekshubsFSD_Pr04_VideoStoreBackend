@@ -44,7 +44,7 @@ class FilmClass {
         return (
             Film.findAll()
                 .then(results => {
-                    return(results)
+                    return (results)
                 })
         )
     }
@@ -77,6 +77,21 @@ class FilmClass {
         // // }
 
     };
+    modify = async (id, title) => {
+        return (
+            Film.update(title, {
+                where: { id: id }
+            })
+                .then(elmnt => {
+                    User.findOne({
+                        where: { id: id }
+                    })
+                        .then(elmnt => {
+                            res.send(elmnt)
+                        })
+                })
+        )
+    };
     deleteAll = async () => {
         return (
             Film.destroy({
@@ -85,6 +100,18 @@ class FilmClass {
             }).then(elmnt => {
                 return (`${elmnt} films have been deleted`)
             })
+        )
+    };
+
+    deleteById = async (id) => {
+        return (
+            Film.destroy({
+                where: { id: id },
+                truncate: false
+            }).then(x => {
+                res.send(x)
+            })
+
         )
     };
     APIgetByTitle = async (title) => {

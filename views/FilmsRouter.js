@@ -25,9 +25,31 @@ router.post('/', async(req, res) => {
         })
     }
 });
+router.put('/:id', async(req, res) => {
+    try {
+        let id = req.params.id;
+        let title = req.body.title;
+        res.json(await FilmsController.modify(id, title))
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 router.delete('/', async(req, res) => {
     try {
         res.json(await FilmsController.deleteAll());
+    
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+})
+router.delete('/:id', async(req, res) => {
+    try {
+        let id= req.params.id
+        res.json(await FilmsController.deleteById(id));
     
     } catch(error) {
         return res.status(500).json({
