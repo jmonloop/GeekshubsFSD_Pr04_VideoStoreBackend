@@ -110,7 +110,7 @@ class FilmClass {
                 where: { id: id },
                 truncate: false
             }).then(x => {
-                res.send(x)
+                return(x)
             })
 
         )
