@@ -83,7 +83,7 @@ class FilmClass {
                 where: { id: id }
             })
                 .then(elmnt => {
-                    User.findOne({
+                    Film.findOne({
                         where: { id: id }
                     })
                         .then(elmnt => {
