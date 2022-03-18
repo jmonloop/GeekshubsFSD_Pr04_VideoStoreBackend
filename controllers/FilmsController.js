@@ -1,5 +1,6 @@
 //Imports
 const axios = require("axios");
+const req = require("express/lib/request");
 const res = require("express/lib/response");
 
 //Film model detructured import
@@ -77,9 +78,9 @@ class FilmClass {
         // // }
 
     };
-    modify = async (id, title) => {
+    modify = async (id, body) => {
         return (
-            Film.update(title, {
+            Film.update(body, {
                 where: { id: id }
             })
                 .then(elmnt => {

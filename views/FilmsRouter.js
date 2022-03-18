@@ -26,10 +26,10 @@ router.post('/', async(req, res) => {
     }
 });
 router.put('/:id', async(req, res) => {
+    let id = req.params.id
+    let body = req.body
     try {
-        let id = req.params.id;
-        let title = req.body.title;
-        res.json(await FilmsController.modify(id, title))
+        res.json(await FilmsController.modify(id, body))
     } catch(error) {
         return res.status(500).json({
             message: error.message
