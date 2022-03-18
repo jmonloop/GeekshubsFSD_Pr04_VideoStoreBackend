@@ -13,6 +13,16 @@ router.get('/', async(req, res) => {
         })
     }
 });
+router.get('/:id', async(req, res) => {
+    let id = req.params.id
+    try {
+        res.json(await FilmsController.getById(id))
+    } catch(error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+});
 router.post('/', async(req, res) => {
     try {
         let id = req.body.id;

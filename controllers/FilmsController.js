@@ -49,6 +49,14 @@ class FilmClass {
                 })
         )
     }
+    getById = async (id) => {
+        return (
+            Film.findOne({ where: { id: id } })
+                .then(data => {
+                    return(data)
+                })
+        )
+    };
     register = async (id, title) => {
         return (
             Film.findAll({
@@ -88,7 +96,7 @@ class FilmClass {
                         where: { id: id }
                     })
                         .then(elmnt => {
-                            return(elmnt)
+                            return (elmnt)
                         })
                 })
         )
@@ -110,7 +118,7 @@ class FilmClass {
                 where: { id: id },
                 truncate: false
             }).then(x => {
-                return(x)
+                return (x)
             })
 
         )

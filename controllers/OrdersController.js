@@ -156,6 +156,17 @@ OrdersController.deleteById = async (req, res) => {
         res.send(error);
     };
 }
+OrdersController.getById = (req, res) => {
+    let id = req.params.id
+    Order.findOne({ where : { id : id}})
+    .then(data => {
+        if(data != null) {
+            res.send(data)
+        } else {
+            res.send(`${id} not found in the database`)
+        }
+    });
+}
 
 //Export
 module.exports = OrdersController;
