@@ -13,7 +13,7 @@ router.get('/', async(req, res) => {
         })
     }
 });
-router.get('/:id', async(req, res) => {
+router.get('/db/:id', async(req, res) => {
     let id = req.params.id
     try {
         res.json(await FilmsController.getById(id))
